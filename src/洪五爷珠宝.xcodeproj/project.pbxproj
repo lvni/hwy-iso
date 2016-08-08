@@ -16,6 +16,7 @@
 		A5C9A5551D55928D00B22E28 /* hwy_jadeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C9A5541D55928D00B22E28 /* hwy_jadeTests.m */; };
 		A5C9A5601D55928D00B22E28 /* hwy_jadeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C9A55F1D55928D00B22E28 /* hwy_jadeUITests.m */; };
 		A5C9A56E1D55B10F00B22E28 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5C9A54B1D55928D00B22E28 /* Info.plist */; };
+		A5D59DE71D5881DB0075E116 /* HWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D59DE61D5881DB0075E116 /* HWebView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,8 @@
 		A5C9A55B1D55928D00B22E28 /* 洪五爷珠宝.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "洪五爷珠宝.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5C9A55F1D55928D00B22E28 /* hwy_jadeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = hwy_jadeUITests.m; sourceTree = "<group>"; };
 		A5C9A5611D55928D00B22E28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5D59DE41D5881750075E116 /* HWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HWebView.h; path = view/HWebView.h; sourceTree = "<group>"; };
+		A5D59DE61D5881DB0075E116 /* HWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HWebView.m; path = view/HWebView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +105,7 @@
 		A5C9A5391D55928D00B22E28 /* hwy-jade */ = {
 			isa = PBXGroup;
 			children = (
+				A5D59DDE1D5880BF0075E116 /* view */,
 				A5C9A53D1D55928D00B22E28 /* AppDelegate.h */,
 				A5C9A53E1D55928D00B22E28 /* AppDelegate.m */,
 				A5C9A5401D55928D00B22E28 /* ViewController.h */,
@@ -139,6 +143,15 @@
 				A5C9A5611D55928D00B22E28 /* Info.plist */,
 			);
 			path = "hwy-jadeUITests";
+			sourceTree = "<group>";
+		};
+		A5D59DDE1D5880BF0075E116 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				A5D59DE41D5881750075E116 /* HWebView.h */,
+				A5D59DE61D5881DB0075E116 /* HWebView.m */,
+			);
+			name = view;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,6 +288,7 @@
 			files = (
 				A5C9A5421D55928D00B22E28 /* ViewController.m in Sources */,
 				A5C9A53F1D55928D00B22E28 /* AppDelegate.m in Sources */,
+				A5D59DE71D5881DB0075E116 /* HWebView.m in Sources */,
 				A5C9A53C1D55928D00B22E28 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

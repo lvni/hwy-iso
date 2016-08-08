@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    webview = [[UIWebView alloc] initWithFrame:CGRectMake(0.0f,0.0f,self.view.bounds.size.width,self.view.bounds.size.height)];
+    webview = [[HWebView alloc] initWithFrame:CGRectMake(0.0f,0.0f,self.view.bounds.size.width,self.view.bounds.size.height)];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://app.hong5ye.com/webapp/index.html"]];
     //NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://192.168.1.161//webapp/index.html"]];
     [self.view addSubview:webview];

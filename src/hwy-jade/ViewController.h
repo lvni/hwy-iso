@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "view/HWebView.h"
 
 @interface ViewController : UIViewController
 {
-    UIWebView *webview;
+    HWebView *webview;
 }
 
 @end
