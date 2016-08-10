@@ -37,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A50317751D5B0047000D5897 /* HTitleBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HTitleBar.h; path = view/HTitleBar.h; sourceTree = "<group>"; };
+		A50317761D5B0075000D5897 /* HTitleBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTitleBar.m; path = view/HTitleBar.m; sourceTree = "<group>"; };
 		A5C9A5371D55928D00B22E28 /* 洪五爷珠宝.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "洪五爷珠宝.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5C9A53B1D55928D00B22E28 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A5C9A53D1D55928D00B22E28 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -150,6 +152,8 @@
 			children = (
 				A5D59DE41D5881750075E116 /* HWebView.h */,
 				A5D59DE61D5881DB0075E116 /* HWebView.m */,
+				A50317751D5B0047000D5897 /* HTitleBar.h */,
+				A50317761D5B0075000D5897 /* HTitleBar.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -430,13 +434,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: WenLi Zheng (GL3BV3VAS3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: WenLi Zheng (GL3BV3VAS3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = "hwy-jade/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GZLiuYuan.jade;
 				PRODUCT_NAME = "洪五爷珠宝";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -445,13 +452,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: WenLi Zheng (GL3BV3VAS3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: WenLi Zheng (GL3BV3VAS3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = "hwy-jade/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GZLiuYuan.jade;
 				PRODUCT_NAME = "洪五爷珠宝";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
