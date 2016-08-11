@@ -42,7 +42,7 @@
 -(void) initNaviBar {
     //初始化状态栏
     return ;
-    NSLog(@"初始化导航栏");
+    //NSLog(@"初始化导航栏");
     navigationBar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 150)];
     backItem = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 56, 54)];
     [backItem setImage:[UIImage imageNamed:@"Back.png"] forState:UIControlStateNormal];
