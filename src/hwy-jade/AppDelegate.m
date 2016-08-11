@@ -17,6 +17,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    //注册微信
+    [WXApi registerApp:@"wxbbab02d24a62a8a2"];
     return YES;
 }
 
@@ -40,6 +42,24 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(nonnull NSURL *)url {
+    NSLog(@"openurl %@",url.absoluteString);
+    return [WXApi handleOpenURL:url delegate:self];
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
+    NSLog(@"open %@",url.absoluteString);
+    return [WXApi handleOpenURL:url delegate:self];
+}
+
+-(void) onReq:(BaseReq*)req {
+    
+}
+
+-(void) onResp:(BaseResp*)resp {
+    NSLog(@"weixin huidiao");
 }
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#import "WXApi.h"
 @interface ViewController ()
 
 @end
@@ -40,14 +40,14 @@
 
 -(void) initNaviBar {
     //初始化状态栏
+    //return ;
     NSLog(@"初始化导航栏");
     navigationBar = [[UIView alloc]initWithFrame:CGRectMake(0, statusBarHeight, self.view.bounds.size.width, 50.0f)];
-    backItem = [[UIButton alloc]initWithFrame:CGRectMake(10.0f,  15.0f , 20.0f, 32.0f)];
+    backItem = [[UIButton alloc]initWithFrame:CGRectMake(10.0f,  15.0f , 20.0f, 30.0f)];
     [backItem setImage:[UIImage imageNamed:@"Back.png"] forState:UIControlStateNormal];
-    [backItem setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
     [navigationBar addSubview:backItem];
     
-    homeItem = [[UIButton alloc]initWithFrame:CGRectMake(40.0f,  15.0f , 40.0f, 32.0f)];
+    homeItem = [[UIButton alloc]initWithFrame:CGRectMake(30.0f,  15.0f , 40.0f, 30.0f)];
     [homeItem setTitle:@"首页" forState:UIControlStateNormal];
     [homeItem setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
@@ -65,6 +65,16 @@
 }
 
 - (void)homeClick:(UIButton *)sender {
+    /**
+    //构造SendAuthReq结构体
+    SendAuthReq* req = [[SendAuthReq alloc ] init ];
+    req.scope = @"snsapi_userinfo" ;
+    req.state = @"123" ;
+    //第三方向微信终端发送一个SendAuthReq消息结构
+    [WXApi sendReq:req];
+    //微信登陆
+     **/
+    //return ;
     NSString *s = @PORTAL;
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:s]];
     [webview loadRequest:request];
@@ -84,6 +94,8 @@
 }
 
 -(void) restWebViewHeight {
+    
+    //return;
     float marginTop = statusBarHeight;
     if (navigationBar.hidden == NO) {
         marginTop = navigationBar.bounds.size.height;
@@ -105,11 +117,14 @@
 
 - (void )webViewDidStartLoad:(UIWebView  *)webView {
     preHost = webview.request.URL.host;
+    NSLog(preHost);
 }
 
 - (void) webViewDidFinishLoad:(UIWebView *)webView
 {
+    //return;
     NSString *curlHost = webview.request.URL.host;
+    NSLog(curlHost);
     if ([preHost isEqualToString:curlHost]) {
         //链接没有变化
         return ;
@@ -125,6 +140,13 @@
 - (void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     NSLog(@"didFailLoadWithError:%@", error);
+    
+    //判断失败原因
+    NSString* url = webview.request.URL.absoluteString;
+    if(error.code == 101 ) {
+        
+        NSLog(@"处理自定义协议 %@", [url rangeOfString:@"hwy://"].location);
+    }
 }
 
 

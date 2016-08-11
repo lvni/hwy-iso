@@ -16,8 +16,8 @@
 #define HOST "app.hong5ye.com"
 #define PORTAL "http://app.hong5ye.com/webapp/index.html";
 #else
-#define PORTAL "http://app.hong5ye.com/webapp/index.html";
-#define HOST "app.hong5ye.com"
+#define PORTAL "http://192.168.1.161/webapp/index.html";
+#define HOST "192.168.1.161"
 #endif
 
 @interface ViewController : UIViewController<UIWebViewDelegate>

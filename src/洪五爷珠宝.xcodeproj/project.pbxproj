@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		A53E1AED1D5C20F900D99242 /* Utiils.m in Sources */ = {isa = PBXBuildFile; fileRef = A53E1AEB1D5C20F800D99242 /* Utiils.m */; };
+		A5BBD1141D5C5A000075C4A0 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5BBD10F1D5C5A000075C4A0 /* libWeChatSDK.a */; };
+		A5BBD1171D5C603D0075C4A0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5BBD1161D5C603D0075C4A0 /* SystemConfiguration.framework */; };
+		A5BBD11F1D5C61140075C4A0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5BBD11E1D5C61140075C4A0 /* CoreGraphics.framework */; };
+		A5BBD1211D5C611D0075C4A0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5BBD1201D5C611D0075C4A0 /* UIKit.framework */; };
+		A5BBD1241D5C616B0075C4A0 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A5BBD1181D5C60700075C4A0 /* libsqlite3.0.tbd */; };
+		A5BBD1251D5C61810075C4A0 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A5BBD11C1D5C609D0075C4A0 /* libc++.tbd */; };
+		A5BBD1261D5C61900075C4A0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A5BBD11A1D5C607B0075C4A0 /* libz.tbd */; };
+		A5BBD1281D5C63360075C4A0 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5BBD1271D5C63360075C4A0 /* CoreTelephony.framework */; };
 		A5C9A53C1D55928D00B22E28 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C9A53B1D55928D00B22E28 /* main.m */; };
 		A5C9A53F1D55928D00B22E28 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C9A53E1D55928D00B22E28 /* AppDelegate.m */; };
 		A5C9A5421D55928D00B22E28 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C9A5411D55928D00B22E28 /* ViewController.m */; };
@@ -42,6 +50,18 @@
 		A50317761D5B0075000D5897 /* HTitleBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTitleBar.m; path = view/HTitleBar.m; sourceTree = "<group>"; };
 		A53E1AEB1D5C20F800D99242 /* Utiils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utiils.m; sourceTree = "<group>"; };
 		A53E1AEC1D5C20F800D99242 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		A5BBD10F1D5C5A000075C4A0 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		A5BBD1111D5C5A000075C4A0 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		A5BBD1121D5C5A000075C4A0 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		A5BBD1131D5C5A000075C4A0 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		A5BBD1161D5C603D0075C4A0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		A5BBD1181D5C60700075C4A0 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		A5BBD11A1D5C607B0075C4A0 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		A5BBD11C1D5C609D0075C4A0 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		A5BBD11E1D5C61140075C4A0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A5BBD1201D5C611D0075C4A0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A5BBD1221D5C61390075C4A0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		A5BBD1271D5C63360075C4A0 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		A5C9A5371D55928D00B22E28 /* 洪五爷珠宝.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "洪五爷珠宝.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5C9A53B1D55928D00B22E28 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A5C9A53D1D55928D00B22E28 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -67,6 +87,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5BBD1281D5C63360075C4A0 /* CoreTelephony.framework in Frameworks */,
+				A5BBD1261D5C61900075C4A0 /* libz.tbd in Frameworks */,
+				A5BBD1251D5C61810075C4A0 /* libc++.tbd in Frameworks */,
+				A5BBD1241D5C616B0075C4A0 /* libsqlite3.0.tbd in Frameworks */,
+				A5BBD1211D5C611D0075C4A0 /* UIKit.framework in Frameworks */,
+				A5BBD11F1D5C61140075C4A0 /* CoreGraphics.framework in Frameworks */,
+				A5BBD1171D5C603D0075C4A0 /* SystemConfiguration.framework in Frameworks */,
+				A5BBD1141D5C5A000075C4A0 /* libWeChatSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +118,7 @@
 		A53E1AE91D5C20F800D99242 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				A5BBD10E1D5C5A000075C4A0 /* weixin */,
 				A53E1AEA1D5C20F800D99242 /* models */,
 			);
 			path = include;
@@ -104,9 +133,36 @@
 			path = models;
 			sourceTree = "<group>";
 		};
+		A5BBD10E1D5C5A000075C4A0 /* weixin */ = {
+			isa = PBXGroup;
+			children = (
+				A5BBD10F1D5C5A000075C4A0 /* libWeChatSDK.a */,
+				A5BBD1111D5C5A000075C4A0 /* WechatAuthSDK.h */,
+				A5BBD1121D5C5A000075C4A0 /* WXApi.h */,
+				A5BBD1131D5C5A000075C4A0 /* WXApiObject.h */,
+			);
+			path = weixin;
+			sourceTree = "<group>";
+		};
+		A5BBD1291D5C63490075C4A0 /* framework */ = {
+			isa = PBXGroup;
+			children = (
+				A5BBD1181D5C60700075C4A0 /* libsqlite3.0.tbd */,
+				A5BBD1161D5C603D0075C4A0 /* SystemConfiguration.framework */,
+				A5BBD11A1D5C607B0075C4A0 /* libz.tbd */,
+				A5BBD11C1D5C609D0075C4A0 /* libc++.tbd */,
+				A5BBD11E1D5C61140075C4A0 /* CoreGraphics.framework */,
+				A5BBD1201D5C611D0075C4A0 /* UIKit.framework */,
+				A5BBD1221D5C61390075C4A0 /* libsqlite3.tbd */,
+				A5BBD1271D5C63360075C4A0 /* CoreTelephony.framework */,
+			);
+			name = framework;
+			sourceTree = "<group>";
+		};
 		A5C9A52E1D55928D00B22E28 = {
 			isa = PBXGroup;
 			children = (
+				A5BBD1291D5C63490075C4A0 /* framework */,
 				A5C9A5391D55928D00B22E28 /* hwy-jade */,
 				A5C9A5531D55928D00B22E28 /* hwy-jadeTests */,
 				A5C9A55E1D55928D00B22E28 /* hwy-jadeUITests */,
@@ -456,6 +512,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -463,6 +520,11 @@
 				INFOPLIST_FILE = "hwy-jade/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(PROJECT_DIR)/hwy-jade/include/weixin\"",
+				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = GZLiuYuan.jade;
 				PRODUCT_NAME = "洪五爷珠宝";
 				PROVISIONING_PROFILE = "";
@@ -474,12 +536,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = "hwy-jade/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(PROJECT_DIR)/hwy-jade/include/weixin\"",
+				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = GZLiuYuan.jade;
 				PRODUCT_NAME = "洪五爷珠宝";
 				PROVISIONING_PROFILE = "";
