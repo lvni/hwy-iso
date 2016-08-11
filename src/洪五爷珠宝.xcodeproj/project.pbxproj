@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A53E1AED1D5C20F900D99242 /* Utiils.m in Sources */ = {isa = PBXBuildFile; fileRef = A53E1AEB1D5C20F800D99242 /* Utiils.m */; };
 		A5C9A53C1D55928D00B22E28 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C9A53B1D55928D00B22E28 /* main.m */; };
 		A5C9A53F1D55928D00B22E28 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C9A53E1D55928D00B22E28 /* AppDelegate.m */; };
 		A5C9A5421D55928D00B22E28 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C9A5411D55928D00B22E28 /* ViewController.m */; };
@@ -39,6 +40,8 @@
 /* Begin PBXFileReference section */
 		A50317751D5B0047000D5897 /* HTitleBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HTitleBar.h; path = view/HTitleBar.h; sourceTree = "<group>"; };
 		A50317761D5B0075000D5897 /* HTitleBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTitleBar.m; path = view/HTitleBar.m; sourceTree = "<group>"; };
+		A53E1AEB1D5C20F800D99242 /* Utiils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utiils.m; sourceTree = "<group>"; };
+		A53E1AEC1D5C20F800D99242 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		A5C9A5371D55928D00B22E28 /* 洪五爷珠宝.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "洪五爷珠宝.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5C9A53B1D55928D00B22E28 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A5C9A53D1D55928D00B22E28 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -84,6 +87,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A53E1AE91D5C20F800D99242 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				A53E1AEA1D5C20F800D99242 /* models */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		A53E1AEA1D5C20F800D99242 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				A53E1AEB1D5C20F800D99242 /* Utiils.m */,
+				A53E1AEC1D5C20F800D99242 /* Utils.h */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
 		A5C9A52E1D55928D00B22E28 = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +127,7 @@
 		A5C9A5391D55928D00B22E28 /* hwy-jade */ = {
 			isa = PBXGroup;
 			children = (
+				A53E1AE91D5C20F800D99242 /* include */,
 				A5D59DDE1D5880BF0075E116 /* view */,
 				A5C9A53D1D55928D00B22E28 /* AppDelegate.h */,
 				A5C9A53E1D55928D00B22E28 /* AppDelegate.m */,
@@ -294,6 +315,7 @@
 				A5C9A53F1D55928D00B22E28 /* AppDelegate.m in Sources */,
 				A5D59DE71D5881DB0075E116 /* HWebView.m in Sources */,
 				A5C9A53C1D55928D00B22E28 /* main.m in Sources */,
+				A53E1AED1D5C20F900D99242 /* Utiils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "view/HWebView.h"
+#import "include/models/Utils.h"
 
 //#define DEBUG 0
 
@@ -29,6 +30,7 @@
     UIView * navigationBar ; // 导航栏
     HWebView *webview;
     NSString *officeHost;
+    NSString *preHost;
     float statusBarHeight;
     
 }

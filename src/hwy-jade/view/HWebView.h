@@ -18,6 +18,7 @@
 @property int _headerHeight;
 - (void) initView;
 - (void) showNaviBar;
+-(void) setUa ;
 @end
 
 #endif /* HWebView_h */
