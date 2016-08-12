@@ -16,4 +16,19 @@
     return uuid;
 }
 
+-(NSDictionary *)parseQuery:(NSString*)query {
+    NSDictionary *params = [[NSDictionary alloc]init];
+    NSLog(@"query %@",query);
+    NSArray *tmp = [query componentsSeparatedByString:@"&"];
+    id i;
+    for (i in tmp) {
+        NSArray* kp =[i componentsJoinedByString:@"="];
+        if ([kp count] != 2) {
+            continue;
+        }
+        [params setValue:kp[1] forKeyPath:kp[0]];
+    }
+    return params;
+}
+
 @end

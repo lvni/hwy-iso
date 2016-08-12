@@ -65,15 +65,7 @@
 }
 
 - (void)homeClick:(UIButton *)sender {
-    /**
-    //构造SendAuthReq结构体
-    SendAuthReq* req = [[SendAuthReq alloc ] init ];
-    req.scope = @"snsapi_userinfo" ;
-    req.state = @"123" ;
-    //第三方向微信终端发送一个SendAuthReq消息结构
-    [WXApi sendReq:req];
-    //微信登陆
-     **/
+    
     //return ;
     NSString *s = @PORTAL;
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:s]];
@@ -117,23 +109,12 @@
 
 - (void )webViewDidStartLoad:(UIWebView  *)webView {
     preHost = webview.request.URL.host;
-    NSLog(preHost);
 }
 
 - (void) webViewDidFinishLoad:(UIWebView *)webView
 {
     //return;
-    NSString *curlHost = webview.request.URL.host;
-    NSLog(curlHost);
-    if ([preHost isEqualToString:curlHost]) {
-        //链接没有变化
-        return ;
-    }
-    if (curlHost.length > 3 && ![curlHost isEqualToString:officeHost ]) {
-        [self showNaviBar];
-    } else {
-        [self hideNaviBar];
-    }
+    
     
 }
 
@@ -141,18 +122,57 @@
 {
     NSLog(@"didFailLoadWithError:%@", error);
     
-    //判断失败原因
-    NSString* url = webview.request.URL.absoluteString;
-    if(error.code == 101 ) {
-        
-        NSLog(@"处理自定义协议 %@", [url rangeOfString:@"hwy://"].location);
-    }
 }
 
 
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     //NSLog(@"yes :%@",[request allHTTPHeaderFields]);
+    NSURL *url = [request URL];
+    NSString *scheme = [url scheme];
+    NSString *contoller = [url host];
+    NSString *query = [url query];
+    //处理自定义的协议
+    if ([scheme isEqualToString:@"hwy"]) {
+        NSLog(@"query is %@", query);
+        NSArray *params = [query componentsSeparatedByString:@"&"];
+        NSMutableDictionary *requestParams = [NSMutableDictionary dictionaryWithCapacity:10] ;
+        id i;
+        for (i in params) {
+            NSLog(@"were %@", i);
+            NSArray *tmp = [i componentsSeparatedByString:@"="];
+            if ([tmp count] > 1) {
+
+                [requestParams setValue:[tmp objectAtIndex:1] forKey:[tmp objectAtIndex:0]];
+            }
+        }
+        
+        //login  share pay scan
+        if ([contoller isEqualToString:@"login"]) {
+            //设置回调
+            jsCallback = [requestParams objectForKey:@"callback"];
+            //构造SendAuthReq结构体
+            if ([@"weixin" isEqualToString: [requestParams objectForKey:@"act"]]) {
+                SendAuthReq* req = [[SendAuthReq alloc ] init ];
+                req.scope = @"snsapi_userinfo" ;
+                req.state = @"123" ;
+                //第三方向微信终端发送一个SendAuthReq消息结构
+                [WXApi sendReq:req];
+            }
+            
+            
+        }
+        
+        return NO;
+    }
+    
+    //判断是官网则不显示按钮
+    if (contoller.length > 3 && ![contoller isEqualToString:officeHost ]) {
+        [self showNaviBar];
+    } else {
+        [self hideNaviBar];
+    }
+    
     return YES;
 }
 
@@ -167,6 +187,51 @@
     [[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
 }
 
+-(void) onReq:(BaseReq*)req {
+    
+}
 
+-(void) onResp:(BaseResp*)resp {
+    
+    NSLog(@"weixin back %@",[resp errStr]);
+    if ([resp isKindOfClass: [PayResp class]]){
+        //支付回调
+        PayResp* response = (PayResp*)resp;
+        //调用前端回调接口
+        switch(response.errCode){
+            case WXSuccess:
+                //服务器端查询支付通知或查询API返回的结果再提示成功
+                NSLog(@"支付成功");
+                break;
+            default:
+                NSLog(@"支付失败，retcode=%d",resp.errCode);
+                break;
+        }
+    }
+    
+    //登陆回调
+    if ([resp isKindOfClass:[SendAuthResp class]]) {
+        SendAuthResp* tresp = (SendAuthResp*)resp ;
+        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:10] ;
+    
+        [params setObject:[NSNumber numberWithUnsignedInt:[tresp errCode]] forKey:@"errCode"];
+        if ([tresp errStr]) {
+            [params setObject:[tresp errStr] forKey:@"errStr"];
+        }
+        if ([tresp code]) {
+            [params setObject:[tresp code] forKey:@"code"];
+        }
+        
+        if ([jsCallback length] > 3) {
+            //有回调
+            NSData *data=[NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:nil];
+            NSString * jsString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSLog(jsString);
+            NSString * callback = [NSString stringWithFormat:@"%@(%@)",jsCallback, jsString];
+            [webview stringByEvaluatingJavaScriptFromString:callback];
+            
+        }
+    }
+}
 
 @end

@@ -9,15 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "view/HWebView.h"
 #import "include/models/Utils.h"
-
-//#define DEBUG 0
+#import "WXApi.h"
+#define DEBUG 0
 
 #ifdef DEBUG
-#define HOST "app.hong5ye.com"
-#define PORTAL "http://app.hong5ye.com/webapp/index.html";
-#else
-#define PORTAL "http://192.168.1.161/webapp/index.html";
+#define PORTAL "http://192.168.1.161/webapp/index.html"
 #define HOST "192.168.1.161"
+#else
+#define HOST "app.hong5ye.com"
+#define PORTAL "http://app.hong5ye.com/webapp/index.html"
 #endif
 
 @interface ViewController : UIViewController<UIWebViewDelegate>
@@ -31,9 +31,13 @@
     HWebView *webview;
     NSString *officeHost;
     NSString *preHost;
+    NSString *jsCallback ;
     float statusBarHeight;
     
+    
+    
 }
-
+-(void) onReq:(BaseReq*)req;
+-(void) onResp:(BaseResp*)resp ;
 @end
 

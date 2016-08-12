@@ -46,8 +46,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A50317751D5B0047000D5897 /* HTitleBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HTitleBar.h; path = view/HTitleBar.h; sourceTree = "<group>"; };
-		A50317761D5B0075000D5897 /* HTitleBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTitleBar.m; path = view/HTitleBar.m; sourceTree = "<group>"; };
 		A53E1AEB1D5C20F800D99242 /* Utiils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utiils.m; sourceTree = "<group>"; };
 		A53E1AEC1D5C20F800D99242 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		A5BBD10F1D5C5A000075C4A0 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
@@ -229,8 +227,6 @@
 			children = (
 				A5D59DE41D5881750075E116 /* HWebView.h */,
 				A5D59DE61D5881DB0075E116 /* HWebView.m */,
-				A50317751D5B0047000D5897 /* HTitleBar.h */,
-				A50317761D5B0075000D5897 /* HTitleBar.m */,
 			);
 			name = view;
 			sourceTree = "<group>";

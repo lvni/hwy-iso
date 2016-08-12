@@ -5,5 +5,7 @@
 @interface Utils:NSObject;
 
 -(NSString*) genCuid;
+
+-(NSDictionary *)parseQuery:(NSString*)query;
 @end
 #endif

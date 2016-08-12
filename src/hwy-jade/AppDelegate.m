@@ -14,6 +14,8 @@
 
 @implementation AppDelegate
 
+@synthesize window = _window;
+@synthesize viewController = _viewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -54,12 +56,22 @@
     return [WXApi handleOpenURL:url delegate:self];
 }
 
+
+//控制器控制微信事件
 -(void) onReq:(BaseReq*)req {
-    
+    UIViewController * rootcv = self.window.rootViewController;
+    if ([rootcv isKindOfClass:[ViewController class]]) {
+        ViewController * vc = (ViewController *)rootcv;
+        [vc onReq: req ];
+    }
 }
 
 -(void) onResp:(BaseResp*)resp {
-    NSLog(@"weixin huidiao");
+    UIViewController * rootcv = self.window.rootViewController;
+    if ([rootcv isKindOfClass:[ViewController class]]) {
+        ViewController * vc = (ViewController *)rootcv;
+        [vc onResp: resp ];
+    }
 }
 
 @end
