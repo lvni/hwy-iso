@@ -134,12 +134,10 @@
     NSString *query = [url query];
     //处理自定义的协议
     if ([scheme isEqualToString:@"hwy"]) {
-        NSLog(@"query is %@", query);
         NSArray *params = [query componentsSeparatedByString:@"&"];
         NSMutableDictionary *requestParams = [NSMutableDictionary dictionaryWithCapacity:10] ;
         id i;
         for (i in params) {
-            NSLog(@"were %@", i);
             NSArray *tmp = [i componentsSeparatedByString:@"="];
             if ([tmp count] > 1) {
 
@@ -148,7 +146,7 @@
         }
         
         //login  share pay scan
-        if ([contoller isEqualToString:@"login"]) {
+        if ([contoller isEqualToString:@"login"] && [@"weixin" isEqualToString:[requestParams objectForKey:@"act"]]) {
             //设置回调
             jsCallback = [requestParams objectForKey:@"callback"];
             //构造SendAuthReq结构体
@@ -161,6 +159,10 @@
             }
             
             
+        }
+        if ([contoller isEqualToString:@"pay"] && [@"weixin" isEqualToString:[requestParams objectForKey:@"act"]]) {
+            //微信支付
+            NSLog([requestParams objectForKey:@"params"]);
         }
         
         return NO;
