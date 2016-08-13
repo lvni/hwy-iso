@@ -25,6 +25,7 @@
 		A5C9A5551D55928D00B22E28 /* hwy_jadeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C9A5541D55928D00B22E28 /* hwy_jadeTests.m */; };
 		A5C9A5601D55928D00B22E28 /* hwy_jadeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C9A55F1D55928D00B22E28 /* hwy_jadeUITests.m */; };
 		A5C9A56E1D55B10F00B22E28 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5C9A54B1D55928D00B22E28 /* Info.plist */; };
+		A5D0594B1D5F040400CF3E00 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5D0594A1D5F040400CF3E00 /* AVFoundation.framework */; };
 		A5D59DE71D5881DB0075E116 /* HWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D59DE61D5881DB0075E116 /* HWebView.m */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +77,7 @@
 		A5C9A55B1D55928D00B22E28 /* 洪五爷珠宝.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "洪五爷珠宝.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5C9A55F1D55928D00B22E28 /* hwy_jadeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = hwy_jadeUITests.m; sourceTree = "<group>"; };
 		A5C9A5611D55928D00B22E28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5D0594A1D5F040400CF3E00 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		A5D59DE41D5881750075E116 /* HWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HWebView.h; path = view/HWebView.h; sourceTree = "<group>"; };
 		A5D59DE61D5881DB0075E116 /* HWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HWebView.m; path = view/HWebView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5D0594B1D5F040400CF3E00 /* AVFoundation.framework in Frameworks */,
 				A5BBD1281D5C63360075C4A0 /* CoreTelephony.framework in Frameworks */,
 				A5BBD1261D5C61900075C4A0 /* libz.tbd in Frameworks */,
 				A5BBD1251D5C61810075C4A0 /* libc++.tbd in Frameworks */,
@@ -145,6 +148,7 @@
 		A5BBD1291D5C63490075C4A0 /* framework */ = {
 			isa = PBXGroup;
 			children = (
+				A5D0594A1D5F040400CF3E00 /* AVFoundation.framework */,
 				A5BBD1181D5C60700075C4A0 /* libsqlite3.0.tbd */,
 				A5BBD1161D5C603D0075C4A0 /* SystemConfiguration.framework */,
 				A5BBD11A1D5C607B0075C4A0 /* libz.tbd */,

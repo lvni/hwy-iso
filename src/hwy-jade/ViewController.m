@@ -36,7 +36,7 @@
     [webview loadRequest:request];
     //[webview initView];
     
-    
+    [self setUpShare];
 }
 
 -(void) initNaviBar {
@@ -148,6 +148,11 @@
             [requestParams setObject:value forKey:key];
         }
         
+        
+        NSData *paramsData = [[requestParams objectForKey:@"params"] dataUsingEncoding:NSUTF8StringEncoding]; //NSASCIIStringEncoding
+        NSError *error = nil;
+        id jsonObject = [NSJSONSerialization JSONObjectWithData:paramsData options:(NSJSONReadingAllowFragments) error:&error];
+        
         //login  share pay scan
         if ([contoller isEqualToString:@"login"] && [@"weixin" isEqualToString:[requestParams objectForKey:@"act"]]) {
             //设置回调
@@ -165,9 +170,7 @@
         }
         if ([contoller isEqualToString:@"pay"] && [@"weixin" isEqualToString:[requestParams objectForKey:@"act"]]) {
             //微信支付
-            NSData *paramsData = [[requestParams objectForKey:@"params"] dataUsingEncoding:NSUTF8StringEncoding]; //NSASCIIStringEncoding
-            NSError *error = nil;
-            id jsonObject = [NSJSONSerialization JSONObjectWithData:paramsData options:(NSJSONReadingAllowFragments) error:&error];
+            
             jsCallback = [requestParams objectForKey:@"callback"];
             if (jsonObject ==nil && jsCallback != nil) {
                 NSString *jsExec = [NSString stringWithFormat:@"%@(%@)",jsCallback,@"{errCode:-1}"];
@@ -182,6 +185,10 @@
             request.timeStamp = [[jsonObject objectForKey:@"timestamp"] intValue];
             request.sign= [jsonObject objectForKey:@"sign"];
             [WXApi sendReq:request];
+        }
+        
+        if ([contoller isEqualToString:@"share"]) {
+            //分享
         }
         
         return NO;
@@ -248,6 +255,35 @@
             
         }
     }
+}
+
+/**
+ * 设置分享
+ **/
+
+-(void) setUpShare {
+    float bodyWidth = self.view.bounds.size.width;
+    float bodyHeight = self.view.bounds.size.height;
+    float buttonSize = 64.0f;
+    float sharBarSize  = 80.0f;
+    float cancelBoxSize = sharBarSize - buttonSize;
+    shareBar = [[UIView alloc] initWithFrame:CGRectMake(0, bodyHeight - sharBarSize, bodyWidth, sharBarSize)];
+    shareBar.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
+    
+    float firstStart = ((bodyWidth / 2 )  - (buttonSize / 2)) / 2;
+    float bntPos = (sharBarSize - buttonSize) / 2;
+    
+    shareWxFriend = [[UIImageView alloc] initWithFrame:CGRectMake(firstStart, bntPos , buttonSize, buttonSize)];
+    [shareWxFriend setImage:[UIImage imageNamed:@"WxFriend"]];
+    shareWxFriend.backgroundColor = [UIColor clearColor];
+    [shareBar addSubview:shareWxFriend];
+    
+    shareWxCircle = [[UIImageView alloc] initWithFrame:CGRectMake(firstStart + (bodyWidth / 2 ), bntPos , buttonSize, buttonSize)];
+    [shareWxCircle setImage:[UIImage imageNamed:@"WxCircle"]];
+    shareWxCircle.backgroundColor = [UIColor clearColor];
+    [shareBar addSubview:shareWxCircle];
+    shareBar.hidden = YES;
+    [self.view addSubview:shareBar];
 }
 
 @end

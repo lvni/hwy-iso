@@ -10,6 +10,7 @@
 #import "view/HWebView.h"
 #import "include/models/Utils.h"
 #import "WXApi.h"
+#import <AVFoundation/AVFoundation.h>
 //#define DEBUG 0
 
 #ifdef DEBUG
@@ -20,14 +21,19 @@
 #define PORTAL "http://app.hong5ye.com/webapp/index.html"
 #endif
 
-@interface ViewController : UIViewController<UIWebViewDelegate>
+@interface ViewController : UIViewController<UIWebViewDelegate, AVCaptureMetadataOutputObjectsDelegate>
 {
     
     //返回和关闭按钮
     UIButton * backItem; //返回按钮
     UIButton * homeItem; //首页按钮
     
+    UIImageView * shareWxFriend; //分享微信朋友
+    UIImageView * shareWxCircle; //分享微信朋友圈
+    
     UIView * navigationBar ; // 导航栏
+    UIView * shareBar ; //分享栏
+    
     HWebView *webview;
     NSString *officeHost;
     NSString *preHost;
