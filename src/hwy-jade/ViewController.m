@@ -32,6 +32,7 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:s]];
     [self.view addSubview:webview];
     [webview setDelegate:self];
+    webview.scrollView.bounces = NO;
     [webview loadRequest:request];
     //[webview initView];
     
@@ -41,6 +42,7 @@
 -(void) initNaviBar {
     //初始化状态栏
     //return ;
+    
     NSLog(@"初始化导航栏");
     navigationBar = [[UIView alloc]initWithFrame:CGRectMake(0, statusBarHeight, self.view.bounds.size.width, 50.0f)];
     backItem = [[UIButton alloc]initWithFrame:CGRectMake(10.0f,  15.0f , 20.0f, 30.0f)];
