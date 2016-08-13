@@ -134,15 +134,16 @@
     NSString *query = [url query];
     //处理自定义的协议
     if ([scheme isEqualToString:@"hwy"]) {
+        
+        NSLog(@"scheme call %@", [url absoluteString]);
         NSArray *params = [query componentsSeparatedByString:@"&"];
         NSMutableDictionary *requestParams = [NSMutableDictionary dictionaryWithCapacity:10] ;
         id i;
         for (i in params) {
             NSArray *tmp = [i componentsSeparatedByString:@"="];
-            if ([tmp count] > 1) {
-
-                [requestParams setValue:[tmp objectAtIndex:1] forKey:[tmp objectAtIndex:0]];
-            }
+            NSString *key = [[tmp firstObject] stringByRemovingPercentEncoding];
+            NSString *value = [[tmp lastObject] stringByRemovingPercentEncoding];
+            [requestParams setObject:value forKey:key];
         }
         
         //login  share pay scan
@@ -162,7 +163,23 @@
         }
         if ([contoller isEqualToString:@"pay"] && [@"weixin" isEqualToString:[requestParams objectForKey:@"act"]]) {
             //微信支付
-            NSLog([requestParams objectForKey:@"params"]);
+            NSData *paramsData = [[requestParams objectForKey:@"params"] dataUsingEncoding:NSUTF8StringEncoding]; //NSASCIIStringEncoding
+            NSError *error = nil;
+            id jsonObject = [NSJSONSerialization JSONObjectWithData:paramsData options:(NSJSONReadingAllowFragments) error:&error];
+            jsCallback = [requestParams objectForKey:@"callback"];
+            if (jsonObject ==nil && jsCallback != nil) {
+                NSString *jsExec = [NSString stringWithFormat:@"%@(%@)",jsCallback,@"{errCode:-1}"];
+                [webView stringByEvaluatingJavaScriptFromString:jsExec];
+                return NO;
+            }
+            PayReq *request = [[PayReq alloc] init];
+            request.partnerId = [jsonObject objectForKey:@"partnerid"];
+            request.prepayId= [jsonObject objectForKey:@"prepayid"];
+            request.package = @"Sign=WXPay";
+            request.nonceStr= [jsonObject objectForKey:@"noncestr"];
+            request.timeStamp = [[jsonObject objectForKey:@"timestamp"] intValue];
+            request.sign= [jsonObject objectForKey:@"sign"];
+            [WXApi sendReq:request];
         }
         
         return NO;
@@ -200,15 +217,11 @@
         //支付回调
         PayResp* response = (PayResp*)resp;
         //调用前端回调接口
-        switch(response.errCode){
-            case WXSuccess:
-                //服务器端查询支付通知或查询API返回的结果再提示成功
-                NSLog(@"支付成功");
-                break;
-            default:
-                NSLog(@"支付失败，retcode=%d",resp.errCode);
-                break;
-        }
+        //有回调
+
+        NSString * jsString = [NSString stringWithFormat:@"{errCode:%d}",response.errCode];
+        NSString * callback = [NSString stringWithFormat:@"%@(%@)",jsCallback, jsString];
+        [webview stringByEvaluatingJavaScriptFromString:callback];
     }
     
     //登陆回调
@@ -228,7 +241,6 @@
             //有回调
             NSData *data=[NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:nil];
             NSString * jsString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSLog(jsString);
             NSString * callback = [NSString stringWithFormat:@"%@(%@)",jsCallback, jsString];
             [webview stringByEvaluatingJavaScriptFromString:callback];
             
