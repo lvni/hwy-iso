@@ -189,6 +189,8 @@
         
         if ([contoller isEqualToString:@"share"]) {
             //分享
+            shareContent = jsonObject;
+            shareBar.hidden = NO;
         }
         
         return NO;
