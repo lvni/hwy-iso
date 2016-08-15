@@ -147,11 +147,13 @@
             NSString *value = [[tmp lastObject] stringByRemovingPercentEncoding];
             [requestParams setObject:value forKey:key];
         }
+        id jsonObject = nil;
+        if ([requestParams objectForKey:@"params"]) {
+            NSData *paramsData = [[requestParams objectForKey:@"params"] dataUsingEncoding:NSUTF8StringEncoding]; //NSASCIIStringEncoding
+            NSError *error = nil;
+            jsonObject = [NSJSONSerialization JSONObjectWithData:paramsData options:(NSJSONReadingAllowFragments) error:&error];
+        }
         
-        
-        NSData *paramsData = [[requestParams objectForKey:@"params"] dataUsingEncoding:NSUTF8StringEncoding]; //NSASCIIStringEncoding
-        NSError *error = nil;
-        id jsonObject = [NSJSONSerialization JSONObjectWithData:paramsData options:(NSJSONReadingAllowFragments) error:&error];
         
         //login  share pay scan
         if ([contoller isEqualToString:@"login"] && [@"weixin" isEqualToString:[requestParams objectForKey:@"act"]]) {
@@ -190,7 +192,19 @@
         if ([contoller isEqualToString:@"share"]) {
             //分享
             shareContent = jsonObject;
-            shareBar.hidden = NO;
+            
+            if ([@"close" isEqualToString:[requestParams objectForKey:@"act"]]) {
+                shareBar.hidden = YES;
+            } else {
+                shareBar.hidden = !shareBar.hidden;
+            }
+            
+            
+            if (shareBar.hidden == NO) {
+                //设置超时 10s 消失
+                NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(timerFiredtoCloseShare:) userInfo:nil repeats:NO];
+            }
+            
         }
         
         return NO;
@@ -204,6 +218,10 @@
     }
     
     return YES;
+}
+
+-(void) timerFiredtoCloseShare:(NSTimer *)timer {
+    shareBar.hidden = YES;
 }
 
 //初始化，设置ua
@@ -257,6 +275,14 @@
             
         }
     }
+    
+    //分享回调
+    if ([resp isKindOfClass:[SendMessageToWXResp class]]) {
+        SendMessageToWXResp* response = (SendMessageToWXResp*)resp;
+        NSString * jsString = [NSString stringWithFormat:@"{errCode:%d}",response.errCode];
+        NSString * callback = [NSString stringWithFormat:@"%@(%@)",jsCallback, jsString];
+        [webview stringByEvaluatingJavaScriptFromString:callback];
+    }
 }
 
 /**
@@ -278,6 +304,7 @@
     shareWxFriend = [[UIImageView alloc] initWithFrame:CGRectMake(firstStart, bntPos , buttonSize, buttonSize)];
     [shareWxFriend setImage:[UIImage imageNamed:@"WxFriend"]];
     shareWxFriend.backgroundColor = [UIColor clearColor];
+    
     [shareBar addSubview:shareWxFriend];
     
     shareWxCircle = [[UIImageView alloc] initWithFrame:CGRectMake(firstStart + (bodyWidth / 2 ), bntPos , buttonSize, buttonSize)];
@@ -286,6 +313,38 @@
     [shareBar addSubview:shareWxCircle];
     shareBar.hidden = YES;
     [self.view addSubview:shareBar];
+    
+    
+    shareWxFriend.userInteractionEnabled = true;
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shareWxFriendClick:)];
+    [shareWxFriend addGestureRecognizer:singleTap];
+    
+}
+
+-(void) shareWxFriendClick:(UITapGestureRecognizer *) sender {
+    WXMediaMessage *message = [[WXMediaMessage alloc] init];
+    message.title = [shareContent objectForKey:@"title"];
+    message.description = [shareContent objectForKey:@"desc"];
+
+    NSURL *imgurl = [NSURL URLWithString:[shareContent objectForKey:@"img"]];
+    NSError *error ;
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imgurl options:NSDataReadingUncached error:&error]];
+    if (error != nil) {
+        //下载图片出错，使用本地图片
+        image = [UIImage imageNamed:@"AppIcon"];
+    }
+    [message setThumbImage:image];
+
+    WXWebpageObject *webpageObject = [WXWebpageObject object];
+    webpageObject.webpageUrl = [shareContent objectForKey:@"link"];
+    
+    message.mediaObject = webpageObject;
+    SendMessageToWXReq* req = [[SendMessageToWXReq alloc]init];
+    req.bText = NO;
+    req.message = message;
+    req.scene = WXSceneSession;
+    shareBar.hidden = YES;
+    [WXApi sendReq:req];
 }
 
 @end
