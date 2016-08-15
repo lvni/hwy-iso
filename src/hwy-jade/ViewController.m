@@ -319,6 +319,10 @@
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shareWxFriendClick:)];
     [shareWxFriend addGestureRecognizer:singleTap];
     
+    shareWxCircle.userInteractionEnabled = true;
+    UITapGestureRecognizer *singleTap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shareWxCircleClick:)];
+    [shareWxCircle addGestureRecognizer:singleTap2];
+    
 }
 
 -(void) shareWxFriendClick:(UITapGestureRecognizer *) sender {
@@ -343,6 +347,33 @@
     req.bText = NO;
     req.message = message;
     req.scene = WXSceneSession;
+    shareBar.hidden = YES;
+    [WXApi sendReq:req];
+}
+
+
+-(void) shareWxCircleClick:(UITapGestureRecognizer *) sender {
+    WXMediaMessage *message = [[WXMediaMessage alloc] init];
+    message.title = [shareContent objectForKey:@"desc"];
+    //message.description = [shareContent objectForKey:@"desc"];
+    /**
+    NSURL *imgurl = [NSURL URLWithString:[shareContent objectForKey:@"img"]];
+    NSError *error ;
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imgurl options:NSDataReadingUncached error:&error]];
+    if (error != nil) {
+        //下载图片出错，使用本地图片
+        image = [UIImage imageNamed:@"AppIcon"];
+    }
+    [message setThumbImage:image];
+    **/
+    WXWebpageObject *webpageObject = [WXWebpageObject object];
+    webpageObject.webpageUrl = [shareContent objectForKey:@"link"];
+    
+    message.mediaObject = webpageObject;
+    SendMessageToWXReq* req = [[SendMessageToWXReq alloc]init];
+    req.bText = NO;
+    req.message = message;
+    req.scene = WXSceneTimeline;
     shareBar.hidden = YES;
     [WXApi sendReq:req];
 }
