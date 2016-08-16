@@ -407,14 +407,19 @@
 
     NSURL *imgurl = [NSURL URLWithString:[shareContent objectForKey:@"img"]];
     NSError *error ;
-    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imgurl options:NSDataReadingMappedIfSafe error:&error]];
+    UIImage *image ;
+    NSData *imgData = [NSData dataWithContentsOfURL:imgurl options:NSDataReadingMappedIfSafe error:&error];
     if (error != nil) {
         //下载图片出错，使用本地图片
         NSLog(@"获取图片出错 %@", imgurl.absoluteString);
         image = [UIImage imageNamed:@"AppIcon"];
     } else {
         NSLog(@"获取图片成功 %@ ,width", imgurl.absoluteString);
+        UIImage *tmp = [UIImage imageWithData:imgData];
+        image = [UIImage imageWithData:[self imageWithImage:tmp scaledToSize:CGSizeMake(300, 300)]];
     }
+    
+    
     [message setThumbImage:image];
 
     WXWebpageObject *webpageObject = [WXWebpageObject object];
@@ -431,20 +436,36 @@
 }
 
 
+//对发送的微信的图片压缩
+- (NSData *)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize;
+{
+    UIGraphicsBeginImageContext(newSize);
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return UIImageJPEGRepresentation(newImage, 0.8);
+}
+
 -(void) shareWxCircleClick:(UITapGestureRecognizer *) sender {
     WXMediaMessage *message = [[WXMediaMessage alloc] init];
     message.title = [shareContent objectForKey:@"desc"];
     //message.description = [shareContent objectForKey:@"desc"];
-    /**
     NSURL *imgurl = [NSURL URLWithString:[shareContent objectForKey:@"img"]];
     NSError *error ;
-    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imgurl options:NSDataReadingUncached error:&error]];
+    UIImage *image ;
+    NSData *imgData = [NSData dataWithContentsOfURL:imgurl options:NSDataReadingMappedIfSafe error:&error];
     if (error != nil) {
         //下载图片出错，使用本地图片
+        NSLog(@"获取图片出错 %@", imgurl.absoluteString);
         image = [UIImage imageNamed:@"AppIcon"];
+    } else {
+        NSLog(@"获取图片成功 %@ ,width", imgurl.absoluteString);
+        UIImage *tmp = [UIImage imageWithData:imgData];
+        image = [UIImage imageWithData:[self imageWithImage:tmp scaledToSize:CGSizeMake(300, 300)]];
     }
+    
+    
     [message setThumbImage:image];
-    **/
     loading.hidden = NO;
     WXWebpageObject *webpageObject = [WXWebpageObject object];
     webpageObject.webpageUrl = [shareContent objectForKey:@"link"];
