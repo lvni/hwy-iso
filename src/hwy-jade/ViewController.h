@@ -40,6 +40,11 @@
     NSString *jsCallback ;
     float statusBarHeight;
     NSDictionary *shareContent;
+    NSTimer *timer;
+    UIButton *cancel;
+    
+    NSTimer *loadingTimer;
+    UIWebView *loading; 
     
     
     

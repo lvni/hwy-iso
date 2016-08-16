@@ -37,6 +37,44 @@
     //[webview initView];
     
     [self setUpShare];
+    [self setUpLoading];
+}
+
+//设置loading
+-(void) setUpLoading {
+    float loatindFormSize = 108.0f;
+    float x = (self.view.bounds.size.width - loatindFormSize) / 2;
+    float y =(self.view.bounds.size.height - loatindFormSize) / 2;
+
+    loading = [[UIWebView alloc] initWithFrame:CGRectMake( x, y, loatindFormSize, loatindFormSize)];
+    loading.backgroundColor = [UIColor clearColor];
+    [loading setOpaque:NO];
+    NSString *filePath = [[NSBundle mainBundle]pathForResource:@"loading" ofType:@"html"];
+    loading.hidden = YES;
+    loading.userInteractionEnabled = NO;//用户不可交互
+    [loading loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePath]]];
+    [self.view addSubview:loading];
+    
+    
+
+}
+-(void) showLoading{
+    //显示loading样式，如果500ms没有加在完成的话
+    if (loadingTimer == nil) {
+        loadingTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(loadingShow:) userInfo:nil repeats:NO];
+    } else {
+        [loadingTimer invalidate];
+        [loadingTimer setFireDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
+    }
+}
+
+-(void)hideloading {
+    [loadingTimer invalidate];
+    loading.hidden = YES;
+}
+
+- (void)loadingShow:(NSTimer*) timer{
+    loading.hidden = NO;
 }
 
 -(void) initNaviBar {
@@ -116,13 +154,14 @@
 - (void) webViewDidFinishLoad:(UIWebView *)webView
 {
     //return;
-    
+    [self hideloading];
     
 }
 
 - (void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     NSLog(@"didFailLoadWithError:%@", error);
+    [self hideloading];
     
 }
 
@@ -194,15 +233,28 @@
             shareContent = jsonObject;
             
             if ([@"close" isEqualToString:[requestParams objectForKey:@"act"]]) {
-                shareBar.hidden = YES;
+                [self hideShareBox];
             } else {
-                shareBar.hidden = !shareBar.hidden;
+                
+                if (shareBar.hidden == NO) {
+                    [self hideShareBox];
+                } else {
+                    [self showShareBox];
+                }
+                
             }
             
             
             if (shareBar.hidden == NO) {
                 //设置超时 10s 消失
-                NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(timerFiredtoCloseShare:) userInfo:nil repeats:NO];
+                if (timer != nil) {
+                    //清除
+                    [timer invalidate];
+                    [timer setFireDate:[NSDate dateWithTimeIntervalSinceNow:10.0]];
+                } else {
+                    timer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(timerFiredtoCloseShare:) userInfo:nil repeats:NO];
+                }
+                
             }
             
         }
@@ -217,11 +269,12 @@
         [self hideNaviBar];
     }
     
+    [self showLoading];
     return YES;
 }
 
 -(void) timerFiredtoCloseShare:(NSTimer *)timer {
-    shareBar.hidden = YES;
+    [self hideShareBox];
 }
 
 //初始化，设置ua
@@ -294,9 +347,9 @@
     float bodyHeight = self.view.bounds.size.height;
     float buttonSize = 64.0f;
     float sharBarSize  = 80.0f;
-    float cancelBoxSize = sharBarSize - buttonSize;
-    shareBar = [[UIView alloc] initWithFrame:CGRectMake(0, bodyHeight - sharBarSize, bodyWidth, sharBarSize)];
-    shareBar.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
+    float cancelBoxSize = 40.0f;
+    shareBar = [[UIView alloc] initWithFrame:CGRectMake(0, bodyHeight - sharBarSize - cancelBoxSize, bodyWidth, sharBarSize)];
+    shareBar.backgroundColor = [UIColor whiteColor];
     
     float firstStart = ((bodyWidth / 2 )  - (buttonSize / 2)) / 2;
     float bntPos = (sharBarSize - buttonSize) / 2;
@@ -323,6 +376,28 @@
     UITapGestureRecognizer *singleTap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shareWxCircleClick:)];
     [shareWxCircle addGestureRecognizer:singleTap2];
     
+    //取消box
+    cancel = [[UIButton alloc] initWithFrame:CGRectMake(0, bodyHeight - cancelBoxSize, bodyWidth, cancelBoxSize)];
+    [cancel setTitle:@"取消" forState:UIControlStateNormal];
+    [cancel setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    cancel.backgroundColor = [UIColor whiteColor];
+    cancel.hidden = YES;
+    [cancel addTarget:self action:@selector(shareCancelClick:) forControlEvents:UIControlEventTouchDown];
+    [self.view addSubview:cancel];
+    
+}
+
+-(void)shareCancelClick:(UIButton*)sender {
+    [self hideShareBox];
+}
+-(void)hideShareBox {
+    shareBar.hidden = YES;
+    cancel.hidden = YES;
+}
+
+-(void)showShareBox {
+    shareBar.hidden = NO;
+    cancel.hidden = NO;
 }
 
 -(void) shareWxFriendClick:(UITapGestureRecognizer *) sender {
@@ -347,7 +422,8 @@
     req.bText = NO;
     req.message = message;
     req.scene = WXSceneSession;
-    shareBar.hidden = YES;
+    
+    [self hideShareBox];
     [WXApi sendReq:req];
 }
 
@@ -366,6 +442,7 @@
     }
     [message setThumbImage:image];
     **/
+    loading.hidden = NO;
     WXWebpageObject *webpageObject = [WXWebpageObject object];
     webpageObject.webpageUrl = [shareContent objectForKey:@"link"];
     
@@ -374,7 +451,8 @@
     req.bText = NO;
     req.message = message;
     req.scene = WXSceneTimeline;
-    shareBar.hidden = YES;
+    [self hideShareBox];
+    [self hideloading];
     [WXApi sendReq:req];
 }
 
