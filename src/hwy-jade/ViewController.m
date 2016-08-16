@@ -407,10 +407,13 @@
 
     NSURL *imgurl = [NSURL URLWithString:[shareContent objectForKey:@"img"]];
     NSError *error ;
-    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imgurl options:NSDataReadingUncached error:&error]];
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imgurl options:NSDataReadingMappedIfSafe error:&error]];
     if (error != nil) {
         //下载图片出错，使用本地图片
+        NSLog(@"获取图片出错 %@", imgurl.absoluteString);
         image = [UIImage imageNamed:@"AppIcon"];
+    } else {
+        NSLog(@"获取图片成功 %@ ,width", imgurl.absoluteString);
     }
     [message setThumbImage:image];
 
