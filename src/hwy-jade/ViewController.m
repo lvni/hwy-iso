@@ -180,6 +180,7 @@
         NSArray *params = [query componentsSeparatedByString:@"&"];
         NSMutableDictionary *requestParams = [NSMutableDictionary dictionaryWithCapacity:10] ;
         id i;
+        
         for (i in params) {
             NSArray *tmp = [i componentsSeparatedByString:@"="];
             NSString *key = [[tmp firstObject] stringByRemovingPercentEncoding];
@@ -192,12 +193,10 @@
             NSError *error = nil;
             jsonObject = [NSJSONSerialization JSONObjectWithData:paramsData options:(NSJSONReadingAllowFragments) error:&error];
         }
-        
+        jsCallback = [requestParams objectForKey:@"callback"];
         
         //login  share pay scan
         if ([contoller isEqualToString:@"login"] && [@"weixin" isEqualToString:[requestParams objectForKey:@"act"]]) {
-            //设置回调
-            jsCallback = [requestParams objectForKey:@"callback"];
             //构造SendAuthReq结构体
             if ([@"weixin" isEqualToString: [requestParams objectForKey:@"act"]]) {
                 SendAuthReq* req = [[SendAuthReq alloc ] init ];
@@ -212,7 +211,7 @@
         if ([contoller isEqualToString:@"pay"] && [@"weixin" isEqualToString:[requestParams objectForKey:@"act"]]) {
             //微信支付
             
-            jsCallback = [requestParams objectForKey:@"callback"];
+            
             if (jsonObject ==nil && jsCallback != nil) {
                 NSString *jsExec = [NSString stringWithFormat:@"%@(%@)",jsCallback,@"{errCode:-1}"];
                 [webView stringByEvaluatingJavaScriptFromString:jsExec];
@@ -231,7 +230,7 @@
         if ([contoller isEqualToString:@"share"]) {
             //分享
             shareContent = jsonObject;
-            
+            jsCallback = [requestParams objectForKey:@"callback"];
             if ([@"close" isEqualToString:[requestParams objectForKey:@"act"]]) {
                 [self hideShareBox];
             } else {
