@@ -11,7 +11,7 @@
 #import "include/models/Utils.h"
 #import "WXApi.h"
 #import <AVFoundation/AVFoundation.h>
-#define DEBUG 1
+//#define DEBUG 1
 
 #ifdef DEBUG
 #define PORTAL "http://192.168.1.161/webapp/index.html"
