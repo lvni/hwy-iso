@@ -46,7 +46,12 @@
     NSTimer *loadingTimer;
     UIWebView *loading; 
     
+    AVCaptureSession * session;//二维码输入输出的中间桥梁
     
+    UIView * scanBox;
+    UIButton* scanClose;
+    UIView * scanArea;
+    UILabel* scanTips;
     
 }
 -(void) onReq:(BaseReq*)req;

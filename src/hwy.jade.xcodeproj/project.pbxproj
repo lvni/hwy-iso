@@ -53,6 +53,7 @@
 		A53E1AEC1D5C20F800D99242 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		A53EBA951D62ACFB000F1C48 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		A53EBA961D62ACFB000F1C48 /* loading.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = loading.html; sourceTree = "<group>"; };
+		A53FDF401D63F9C200836705 /* Const.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Const.h; sourceTree = "<group>"; };
 		A5BBD10F1D5C5A000075C4A0 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		A5BBD1111D5C5A000075C4A0 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
 		A5BBD1121D5C5A000075C4A0 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
@@ -211,6 +212,7 @@
 				A5C9A5481D55928D00B22E28 /* LaunchScreen.storyboard */,
 				A5C9A54B1D55928D00B22E28 /* Info.plist */,
 				A5C9A53A1D55928D00B22E28 /* Supporting Files */,
+				A53FDF401D63F9C200836705 /* Const.h */,
 			);
 			path = "hwy-jade";
 			sourceTree = "<group>";

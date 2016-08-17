@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "WXApi.h"
+#import "Const.h"
 @interface ViewController ()
 
 @end
@@ -194,7 +195,6 @@
             jsonObject = [NSJSONSerialization JSONObjectWithData:paramsData options:(NSJSONReadingAllowFragments) error:&error];
         }
         jsCallback = [requestParams objectForKey:@"callback"];
-        
         //login  share pay scan
         if ([contoller isEqualToString:@"login"] && [@"weixin" isEqualToString:[requestParams objectForKey:@"act"]]) {
             //构造SendAuthReq结构体
@@ -230,7 +230,6 @@
         if ([contoller isEqualToString:@"share"]) {
             //分享
             shareContent = jsonObject;
-            jsCallback = [requestParams objectForKey:@"callback"];
             if ([@"close" isEqualToString:[requestParams objectForKey:@"act"]]) {
                 [self hideShareBox];
             } else {
@@ -258,6 +257,12 @@
             
         }
         
+        //二维码扫描
+        if ([contoller isEqualToString:@"scan"]) {
+            NSLog(@"二维码扫描");
+            [self setUpScan];
+        }
+        
         return NO;
     }
     
@@ -274,6 +279,47 @@
 
 -(void) timerFiredtoCloseShare:(NSTimer *)timer {
     [self hideShareBox];
+}
+
+//设置二维码扫描
+-(void)setUpScan {
+    //获取摄像设备
+    AVCaptureDevice * device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    //创建输入流
+    AVCaptureDeviceInput * input = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
+    //创建输出流
+    AVCaptureMetadataOutput * output = [[AVCaptureMetadataOutput alloc]init];
+    //设置代理 在主线程里刷新
+    [output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
+    
+    //初始化链接对象
+    session = [[AVCaptureSession alloc]init];
+    //高质量采集率
+    [session setSessionPreset:AVCaptureSessionPresetHigh];
+    
+    [session addInput:input];
+    [session addOutput:output];
+    //设置扫码支持的编码格式(如下设置条形码和二维码兼容)
+    output.metadataObjectTypes=@[AVMetadataObjectTypeQRCode,AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code];
+    
+    AVCaptureVideoPreviewLayer * layer = [AVCaptureVideoPreviewLayer layerWithSession:session];
+    layer.videoGravity=AVLayerVideoGravityResizeAspectFill;
+    layer.frame=self.view.layer.bounds;
+    [self.view.layer insertSublayer:layer atIndex:0];
+    [session startRunning];
+}
+
+-(void) initScanView {
+    
+}
+
+-(void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection{
+    if (metadataObjects.count>0) {
+        //[session stopRunning];
+        AVMetadataMachineReadableCodeObject * metadataObject = [metadataObjects objectAtIndex : 0 ];
+        //输出扫描字符串
+        NSLog(@"%@",metadataObject.stringValue);
+    }
 }
 
 //初始化，设置ua
@@ -366,13 +412,14 @@
     shareBar.hidden = YES;
     [self.view addSubview:shareBar];
     
-    
+    shareWxFriend.tag = VIEW_TAG_SHARE_FRIEND;
     shareWxFriend.userInteractionEnabled = true;
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shareWxFriendClick:)];
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shareWxClick:)];
     [shareWxFriend addGestureRecognizer:singleTap];
     
+    shareWxCircle.tag = VIEW_TAG_SHARE_TIMELINE;
     shareWxCircle.userInteractionEnabled = true;
-    UITapGestureRecognizer *singleTap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shareWxCircleClick:)];
+    UITapGestureRecognizer *singleTap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shareWxClick:)];
     [shareWxCircle addGestureRecognizer:singleTap2];
     
     //取消box
@@ -399,11 +446,24 @@
     cancel.hidden = NO;
 }
 
--(void) shareWxFriendClick:(UITapGestureRecognizer *) sender {
+-(void) shareWxClick:(UITapGestureRecognizer *) sender {
+    
     WXMediaMessage *message = [[WXMediaMessage alloc] init];
-    message.title = [shareContent objectForKey:@"title"];
-    message.description = [shareContent objectForKey:@"desc"];
-
+    
+    int wxScene = 0;
+    if (sender.view.tag == VIEW_TAG_SHARE_TIMELINE) {
+        //朋友圈
+        wxScene = WXSceneTimeline;
+        message.title = [shareContent objectForKey:@"desc"];
+        //message.description = [shareContent objectForKey:@"desc"];
+    } else {
+        //发给朋友
+        wxScene = WXSceneSession;
+        message.title = [shareContent objectForKey:@"title"];
+        message.description = [shareContent objectForKey:@"desc"];
+        
+    }
+    
     NSURL *imgurl = [NSURL URLWithString:[shareContent objectForKey:@"img"]];
     NSError *error ;
     UIImage *image ;
@@ -428,7 +488,7 @@
     SendMessageToWXReq* req = [[SendMessageToWXReq alloc]init];
     req.bText = NO;
     req.message = message;
-    req.scene = WXSceneSession;
+    req.scene = wxScene;
     
     [self hideShareBox];
     [WXApi sendReq:req];
@@ -443,40 +503,6 @@
     UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return UIImageJPEGRepresentation(newImage, 0.8);
-}
-
--(void) shareWxCircleClick:(UITapGestureRecognizer *) sender {
-    WXMediaMessage *message = [[WXMediaMessage alloc] init];
-    message.title = [shareContent objectForKey:@"desc"];
-    //message.description = [shareContent objectForKey:@"desc"];
-    NSURL *imgurl = [NSURL URLWithString:[shareContent objectForKey:@"img"]];
-    NSError *error ;
-    UIImage *image ;
-    NSData *imgData = [NSData dataWithContentsOfURL:imgurl options:NSDataReadingMappedIfSafe error:&error];
-    if (error != nil) {
-        //下载图片出错，使用本地图片
-        NSLog(@"获取图片出错 %@", imgurl.absoluteString);
-        image = [UIImage imageNamed:@"AppIcon"];
-    } else {
-        NSLog(@"获取图片成功 %@ ,width", imgurl.absoluteString);
-        UIImage *tmp = [UIImage imageWithData:imgData];
-        image = [UIImage imageWithData:[self imageWithImage:tmp scaledToSize:CGSizeMake(300, 300)]];
-    }
-    
-    
-    [message setThumbImage:image];
-    loading.hidden = NO;
-    WXWebpageObject *webpageObject = [WXWebpageObject object];
-    webpageObject.webpageUrl = [shareContent objectForKey:@"link"];
-    
-    message.mediaObject = webpageObject;
-    SendMessageToWXReq* req = [[SendMessageToWXReq alloc]init];
-    req.bText = NO;
-    req.message = message;
-    req.scene = WXSceneTimeline;
-    [self hideShareBox];
-    [self hideloading];
-    [WXApi sendReq:req];
 }
 
 @end
