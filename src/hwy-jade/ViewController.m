@@ -289,14 +289,20 @@ static CGFloat const width = 200.0;
     __weak ViewController *weakSelf = self;
     SYQRCodeViewController *qrcodevc = [[SYQRCodeViewController alloc] init];
     
+
+    
     qrcodevc.SYQRCodeSuncessBlock = ^(SYQRCodeViewController *aqrvc,NSString *qrString) {
-        [weakSelf.navigationController popViewControllerAnimated:YES];
+        [weakSelf dismissModalViewControllerAnimated:YES];
+        NSString *retStr = [NSString stringWithFormat:@"{errCode:0,content:'%@'}", qrString];
+        [self webviewCallback:retStr];
     };
     qrcodevc.SYQRCodeFailBlock = ^(SYQRCodeViewController *aqrvc) {
-        kTipsAlert(@"Failed");
+        
         [weakSelf dismissModalViewControllerAnimated:YES];
+        [self webviewCallback:@"{errCode:-1}"];
     };
     qrcodevc.SYQRCodeCancleBlock = ^(SYQRCodeViewController *aqrvc) {
+        [self webviewCallback:@"{errCode:1}"];
         [weakSelf dismissModalViewControllerAnimated:YES];
     };
     
@@ -304,8 +310,11 @@ static CGFloat const width = 200.0;
 
 }
 
--(void) initScanView {
-    
+-(void) webviewCallback:(NSString*)back {
+    if (jsCallback) {
+        NSString *callBackScript =[NSString stringWithFormat:@"%@(%@)", jsCallback, back];
+        [webview stringByEvaluatingJavaScriptFromString:callBackScript];
+    }
 }
 
 

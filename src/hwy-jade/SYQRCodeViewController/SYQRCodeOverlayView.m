@@ -27,10 +27,22 @@
 }
 
 - (void)createSubViews {
+    
+    CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
+
     //最上部view
     UIView* upView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, kLineMinY)];//80
     upView.alpha = 0.3;
     upView.backgroundColor = [UIColor blackColor];
+    
+    //返回的返回按钮
+    
+    UIButton* back = [[UIButton alloc]initWithFrame:CGRectMake(10.0f, rectStatus.size.height, 40.0f, 30.0f)];
+    [back setTitle:@"返回" forState:UIControlStateNormal];
+    [back setTintColor:[UIColor grayColor]];
+    back.tag = CLOSE_TAG;
+    [back addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [upView addSubview:back];
     [self addSubview:upView];
     
     //左侧的view
@@ -96,7 +108,7 @@
     labIntroudction.textColor = [UIColor whiteColor];
     labIntroudction.text = @"将二维码置于框内,即可自动扫描";
     [self addSubview:labIntroudction];
-    
+    /**
     CGFloat btnWidth = (CGRectGetWidth(labIntroudction.frame) - 40)/2;
     CGFloat btnHeight = 35.0;
     NSArray *btnTitle =@[@"Album", @"Open"];
@@ -114,6 +126,7 @@
         [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btn];
     }
+     **/
 }
 
 - (void)btnClick:(UIButton *)btn {
@@ -124,6 +137,7 @@
 
 - (void)dealloc {
     NSLog(@"dealloc");
+    
 }
 
 @end

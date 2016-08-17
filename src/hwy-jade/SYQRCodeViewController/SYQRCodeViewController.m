@@ -210,6 +210,11 @@
         }
         
         sender.selected = !sender.selected;
+    } else if (sender.tag == CLOSE_TAG) {
+        //返回关闭
+        if (self.SYQRCodeCancleBlock) {
+            self.SYQRCodeCancleBlock(self);
+        }
     }
 }
 
@@ -280,14 +285,12 @@
             if (strResponse && ![strResponse isEqualToString:@""] && strResponse.length > 0) {
                 NSLog(@"qrcodestring==%@",strResponse);
                 
-                if ([strResponse hasPrefix:@"http"]) {
-                    fail = NO;
-#warning scan success提示
-                    AudioServicesPlaySystemSound(1360);
-                    
-                    if (self.SYQRCodeSuncessBlock) {
-                        self.SYQRCodeSuncessBlock(self, strResponse);
-                    }
+                fail = NO;
+
+                AudioServicesPlaySystemSound(1360);
+                
+                if (self.SYQRCodeSuncessBlock) {
+                    self.SYQRCodeSuncessBlock(self, strResponse);
                 }
             }
         }
