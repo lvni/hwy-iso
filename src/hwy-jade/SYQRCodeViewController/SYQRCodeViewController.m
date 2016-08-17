@@ -10,6 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "SYQRCodeOverlayView.h"
 #import "AVCaptureVideoPreviewLayer+Helper.h"
+//#import "../ZXingObjC/ZXingObjC.h"
 
 @interface SYQRCodeViewController () <AVCaptureMetadataOutputObjectsDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -29,7 +30,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor blackColor];
-    self.title = @"Scan";
+    self.title = @"扫描";
     
     _vActivityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 100) / 2.0, (SCREEN_HEIGHT - 164)  / 2.0, 100, 100)];
     _vActivityIndicator.hidesWhenStopped = YES;
@@ -212,6 +213,7 @@
         sender.selected = !sender.selected;
     } else if (sender.tag == CLOSE_TAG) {
         //返回关闭
+        [self stopSYQRCodeReading];
         if (self.SYQRCodeCancleBlock) {
             self.SYQRCodeCancleBlock(self);
         }
@@ -271,7 +273,7 @@
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
     BOOL fail = YES;
-    
+    NSLog(@"reponse");
     //扫描结果
     if (metadataObjects.count > 0) {
         AVMetadataMachineReadableCodeObject *responseObj = metadataObjects[0];

@@ -23,8 +23,12 @@
     }
     
     AVCaptureSession *session = [[AVCaptureSession alloc] init];
+    //[session setSessionPreset:AVCaptureSessionPresetHigh];
     
     //设置检测质量，质量越高扫描越精确
+    if ([session canSetSessionPreset:AVCaptureSessionPresetHigh]) {
+         [session setSessionPreset:AVCaptureSessionPresetHigh];
+    }
     if ([session canSetSessionPreset:AVCaptureSessionPreset1920x1080]) {
         [session setSessionPreset:AVCaptureSessionPreset1920x1080];
     }
@@ -37,9 +41,13 @@
     else if ([session canSetSessionPreset:AVCaptureSessionPreset640x480]) {
         [session setSessionPreset:AVCaptureSessionPreset640x480];
     }
+    else if ([session canSetSessionPreset:AVCaptureSessionPreset352x288]) {
+        [session setSessionPreset:AVCaptureSessionPreset352x288];
+    }
     else {
         [session setSessionPreset:AVCaptureSessionPresetLow];
     }
+    
     
     //添加输入设备
     if ([session canAddInput:input]){
@@ -56,7 +64,7 @@
     }
     
     //识别二维码
-    [output setMetadataObjectTypes:@[AVMetadataObjectTypeQRCode]];
+    [output setMetadataObjectTypes:@[AVMetadataObjectTypeQRCode, AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code]];
     
     //扫描图层
     AVCaptureVideoPreviewLayer *preview = [AVCaptureVideoPreviewLayer layerWithSession:session];
