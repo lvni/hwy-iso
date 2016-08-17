@@ -21,7 +21,7 @@
 #define PORTAL "http://app.hong5ye.com/webapp/index.html"
 #endif
 
-@interface ViewController : UIViewController<UIWebViewDelegate, AVCaptureMetadataOutputObjectsDelegate>
+@interface ViewController : UIViewController<UIWebViewDelegate>
 {
     
     //返回和关闭按钮

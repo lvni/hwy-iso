@@ -10,6 +10,19 @@
 		A53E1AED1D5C20F900D99242 /* Utiils.m in Sources */ = {isa = PBXBuildFile; fileRef = A53E1AEB1D5C20F800D99242 /* Utiils.m */; };
 		A53EBA971D62ACFB000F1C48 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = A53EBA951D62ACFB000F1C48 /* loading.gif */; };
 		A53EBA981D62ACFB000F1C48 /* loading.html in Resources */ = {isa = PBXBuildFile; fileRef = A53EBA961D62ACFB000F1C48 /* loading.html */; };
+		A593F7CE1D640B68009C5D38 /* AVCaptureVideoPreviewLayer+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = A593F7BF1D640B68009C5D38 /* AVCaptureVideoPreviewLayer+Helper.m */; };
+		A593F7CF1D640B68009C5D38 /* QRCodebottomLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A593F7C01D640B68009C5D38 /* QRCodebottomLeft@2x.png */; };
+		A593F7D01D640B68009C5D38 /* QRCodebottomLeft@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A593F7C11D640B68009C5D38 /* QRCodebottomLeft@3x.png */; };
+		A593F7D11D640B68009C5D38 /* QRCodebottomRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A593F7C21D640B68009C5D38 /* QRCodebottomRight@2x.png */; };
+		A593F7D21D640B68009C5D38 /* QRCodebottomRight@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A593F7C31D640B68009C5D38 /* QRCodebottomRight@3x.png */; };
+		A593F7D31D640B68009C5D38 /* QRCodeLine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A593F7C41D640B68009C5D38 /* QRCodeLine@2x.png */; };
+		A593F7D41D640B68009C5D38 /* QRCodeLine@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A593F7C51D640B68009C5D38 /* QRCodeLine@3x.png */; };
+		A593F7D51D640B68009C5D38 /* QRCodeTopLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A593F7C61D640B68009C5D38 /* QRCodeTopLeft@2x.png */; };
+		A593F7D61D640B68009C5D38 /* QRCodeTopLeft@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A593F7C71D640B68009C5D38 /* QRCodeTopLeft@3x.png */; };
+		A593F7D71D640B68009C5D38 /* QRCodeTopRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A593F7C81D640B68009C5D38 /* QRCodeTopRight@2x.png */; };
+		A593F7D81D640B68009C5D38 /* QRCodeTopRight@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A593F7C91D640B68009C5D38 /* QRCodeTopRight@3x.png */; };
+		A593F7D91D640B68009C5D38 /* SYQRCodeOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = A593F7CB1D640B68009C5D38 /* SYQRCodeOverlayView.m */; };
+		A593F7DA1D640B68009C5D38 /* SYQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A593F7CD1D640B68009C5D38 /* SYQRCodeViewController.m */; };
 		A5BBD1141D5C5A000075C4A0 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5BBD10F1D5C5A000075C4A0 /* libWeChatSDK.a */; };
 		A5BBD1171D5C603D0075C4A0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5BBD1161D5C603D0075C4A0 /* SystemConfiguration.framework */; };
 		A5BBD11F1D5C61140075C4A0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5BBD11E1D5C61140075C4A0 /* CoreGraphics.framework */; };
@@ -54,6 +67,22 @@
 		A53EBA951D62ACFB000F1C48 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		A53EBA961D62ACFB000F1C48 /* loading.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = loading.html; sourceTree = "<group>"; };
 		A53FDF401D63F9C200836705 /* Const.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Const.h; sourceTree = "<group>"; };
+		A593F7BE1D640B68009C5D38 /* AVCaptureVideoPreviewLayer+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AVCaptureVideoPreviewLayer+Helper.h"; sourceTree = "<group>"; };
+		A593F7BF1D640B68009C5D38 /* AVCaptureVideoPreviewLayer+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AVCaptureVideoPreviewLayer+Helper.m"; sourceTree = "<group>"; };
+		A593F7C01D640B68009C5D38 /* QRCodebottomLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QRCodebottomLeft@2x.png"; sourceTree = "<group>"; };
+		A593F7C11D640B68009C5D38 /* QRCodebottomLeft@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QRCodebottomLeft@3x.png"; sourceTree = "<group>"; };
+		A593F7C21D640B68009C5D38 /* QRCodebottomRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QRCodebottomRight@2x.png"; sourceTree = "<group>"; };
+		A593F7C31D640B68009C5D38 /* QRCodebottomRight@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QRCodebottomRight@3x.png"; sourceTree = "<group>"; };
+		A593F7C41D640B68009C5D38 /* QRCodeLine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QRCodeLine@2x.png"; sourceTree = "<group>"; };
+		A593F7C51D640B68009C5D38 /* QRCodeLine@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QRCodeLine@3x.png"; sourceTree = "<group>"; };
+		A593F7C61D640B68009C5D38 /* QRCodeTopLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QRCodeTopLeft@2x.png"; sourceTree = "<group>"; };
+		A593F7C71D640B68009C5D38 /* QRCodeTopLeft@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QRCodeTopLeft@3x.png"; sourceTree = "<group>"; };
+		A593F7C81D640B68009C5D38 /* QRCodeTopRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QRCodeTopRight@2x.png"; sourceTree = "<group>"; };
+		A593F7C91D640B68009C5D38 /* QRCodeTopRight@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QRCodeTopRight@3x.png"; sourceTree = "<group>"; };
+		A593F7CA1D640B68009C5D38 /* SYQRCodeOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYQRCodeOverlayView.h; sourceTree = "<group>"; };
+		A593F7CB1D640B68009C5D38 /* SYQRCodeOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYQRCodeOverlayView.m; sourceTree = "<group>"; };
+		A593F7CC1D640B68009C5D38 /* SYQRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYQRCodeViewController.h; sourceTree = "<group>"; };
+		A593F7CD1D640B68009C5D38 /* SYQRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYQRCodeViewController.m; sourceTree = "<group>"; };
 		A5BBD10F1D5C5A000075C4A0 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		A5BBD1111D5C5A000075C4A0 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
 		A5BBD1121D5C5A000075C4A0 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
@@ -149,6 +178,30 @@
 			path = "hwy-jade/html";
 			sourceTree = "<group>";
 		};
+		A593F7BD1D640B68009C5D38 /* SYQRCodeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A593F7BE1D640B68009C5D38 /* AVCaptureVideoPreviewLayer+Helper.h */,
+				A593F7BF1D640B68009C5D38 /* AVCaptureVideoPreviewLayer+Helper.m */,
+				A593F7C01D640B68009C5D38 /* QRCodebottomLeft@2x.png */,
+				A593F7C11D640B68009C5D38 /* QRCodebottomLeft@3x.png */,
+				A593F7C21D640B68009C5D38 /* QRCodebottomRight@2x.png */,
+				A593F7C31D640B68009C5D38 /* QRCodebottomRight@3x.png */,
+				A593F7C41D640B68009C5D38 /* QRCodeLine@2x.png */,
+				A593F7C51D640B68009C5D38 /* QRCodeLine@3x.png */,
+				A593F7C61D640B68009C5D38 /* QRCodeTopLeft@2x.png */,
+				A593F7C71D640B68009C5D38 /* QRCodeTopLeft@3x.png */,
+				A593F7C81D640B68009C5D38 /* QRCodeTopRight@2x.png */,
+				A593F7C91D640B68009C5D38 /* QRCodeTopRight@3x.png */,
+				A593F7CA1D640B68009C5D38 /* SYQRCodeOverlayView.h */,
+				A593F7CB1D640B68009C5D38 /* SYQRCodeOverlayView.m */,
+				A593F7CC1D640B68009C5D38 /* SYQRCodeViewController.h */,
+				A593F7CD1D640B68009C5D38 /* SYQRCodeViewController.m */,
+			);
+			name = SYQRCodeViewController;
+			path = "hwy-jade/SYQRCodeViewController";
+			sourceTree = "<group>";
+		};
 		A5BBD10E1D5C5A000075C4A0 /* weixin */ = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +232,7 @@
 		A5C9A52E1D55928D00B22E28 = {
 			isa = PBXGroup;
 			children = (
+				A593F7BD1D640B68009C5D38 /* SYQRCodeViewController */,
 				A53EBA941D62ACFB000F1C48 /* html */,
 				A5BBD1291D5C63490075C4A0 /* framework */,
 				A5C9A5391D55928D00B22E28 /* hwy-jade */,
@@ -357,11 +411,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5C9A56E1D55B10F00B22E28 /* Info.plist in Resources */,
+				A593F7D41D640B68009C5D38 /* QRCodeLine@3x.png in Resources */,
+				A593F7D81D640B68009C5D38 /* QRCodeTopRight@3x.png in Resources */,
 				A5C9A54A1D55928D00B22E28 /* LaunchScreen.storyboard in Resources */,
 				A53EBA971D62ACFB000F1C48 /* loading.gif in Resources */,
+				A593F7D61D640B68009C5D38 /* QRCodeTopLeft@3x.png in Resources */,
+				A593F7D21D640B68009C5D38 /* QRCodebottomRight@3x.png in Resources */,
+				A593F7D51D640B68009C5D38 /* QRCodeTopLeft@2x.png in Resources */,
+				A593F7D01D640B68009C5D38 /* QRCodebottomLeft@3x.png in Resources */,
 				A5C9A5471D55928D00B22E28 /* Assets.xcassets in Resources */,
+				A593F7CF1D640B68009C5D38 /* QRCodebottomLeft@2x.png in Resources */,
 				A5C9A5451D55928D00B22E28 /* Main.storyboard in Resources */,
 				A53EBA981D62ACFB000F1C48 /* loading.html in Resources */,
+				A593F7D71D640B68009C5D38 /* QRCodeTopRight@2x.png in Resources */,
+				A593F7D31D640B68009C5D38 /* QRCodeLine@2x.png in Resources */,
+				A593F7D11D640B68009C5D38 /* QRCodebottomRight@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,11 +450,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A593F7CE1D640B68009C5D38 /* AVCaptureVideoPreviewLayer+Helper.m in Sources */,
 				A5C9A5421D55928D00B22E28 /* ViewController.m in Sources */,
 				A5C9A53F1D55928D00B22E28 /* AppDelegate.m in Sources */,
 				A5D59DE71D5881DB0075E116 /* HWebView.m in Sources */,
+				A593F7DA1D640B68009C5D38 /* SYQRCodeViewController.m in Sources */,
 				A5C9A53C1D55928D00B22E28 /* main.m in Sources */,
 				A53E1AED1D5C20F900D99242 /* Utiils.m in Sources */,
+				A593F7D91D640B68009C5D38 /* SYQRCodeOverlayView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
