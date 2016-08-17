@@ -34,7 +34,6 @@
     UIView* upView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, kLineMinY)];//80
     upView.alpha = 0.3;
     upView.backgroundColor = [UIColor blackColor];
-    
     //返回的返回按钮
     
     UIButton* back = [[UIButton alloc]initWithFrame:CGRectMake(10.0f, rectStatus.size.height, 40.0f, 30.0f)];
@@ -108,25 +107,24 @@
     labIntroudction.textColor = [UIColor whiteColor];
     labIntroudction.text = @"将二维码置于框内,即可自动扫描";
     [self addSubview:labIntroudction];
-    /**
-    CGFloat btnWidth = (CGRectGetWidth(labIntroudction.frame) - 40)/2;
-    CGFloat btnHeight = 35.0;
-    NSArray *btnTitle =@[@"Album", @"Open"];
+   
+    CGFloat btnWidth = 60.0f;
+    CGFloat btnHeight = 30.0;
+    NSArray *btnTitle =@[@"相册", @"开灯"];
     for (NSInteger i = 0; i < btnTitle.count; i ++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        
-        btn.frame = CGRectMake((btnWidth + 40) * i + 50, CGRectGetMaxY(labIntroudction.frame) + 2, btnWidth, btnHeight);
+        btn.frame = CGRectMake(SCREEN_WIDTH - (btnWidth) * (btnTitle.count - i), rectStatus.size.height, btnWidth, btnHeight);
         [btn setTitle:btnTitle[i] forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         btn.tag = i + BTN_TAG;
         if (btn.tag == BTN_TAG + 1) {
-            [btn setTitle:@"Closed" forState:UIControlStateSelected];
+            [btn setTitle:@"关灯" forState:UIControlStateSelected];
             btn.selected = NO;
         }
         [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:btn];
+        [upView addSubview:btn];
     }
-     **/
+
 }
 
 - (void)btnClick:(UIButton *)btn {

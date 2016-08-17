@@ -258,7 +258,9 @@
     
     if (des.length > 0) {
         NSLog(@"contents =%@",des);
-        [self showAlertWithTitle:nil message:des];
+        if (self.SYQRCodeSuncessBlock) {
+            self.SYQRCodeSuncessBlock(self, des);
+        }
     }
     else {
         [self showAlertWithTitle:nil message:@"解析失败"];
@@ -273,7 +275,6 @@
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
     BOOL fail = YES;
-    NSLog(@"reponse");
     //扫描结果
     if (metadataObjects.count > 0) {
         AVMetadataMachineReadableCodeObject *responseObj = metadataObjects[0];

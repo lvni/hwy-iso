@@ -292,22 +292,28 @@ static CGFloat const width = 200.0;
 
     
     qrcodevc.SYQRCodeSuncessBlock = ^(SYQRCodeViewController *aqrvc,NSString *qrString) {
-        [weakSelf dismissModalViewControllerAnimated:YES];
-        NSString *retStr = [NSString stringWithFormat:@"{errCode:0,content:'%@'}", qrString];
-        [self webviewCallback:retStr];
+        [weakSelf dismissViewControllerAnimated:YES completion:^{
+            NSString *retStr = [NSString stringWithFormat:@"{errCode:0,content:'%@'}", qrString];
+            [self webviewCallback:retStr];
+        }];
+        
     };
     qrcodevc.SYQRCodeFailBlock = ^(SYQRCodeViewController *aqrvc) {
         
-        [weakSelf dismissModalViewControllerAnimated:YES];
-        [self webviewCallback:@"{errCode:-1}"];
+        [weakSelf dismissViewControllerAnimated:YES completion:^{
+            [self webviewCallback:@"{errCode:-1}"];
+        }];
+        
     };
     qrcodevc.SYQRCodeCancleBlock = ^(SYQRCodeViewController *aqrvc) {
-        [self webviewCallback:@"{errCode:1}"];
-        [weakSelf dismissModalViewControllerAnimated:YES];
+        
+        [weakSelf dismissViewControllerAnimated:YES completion:^{
+            [self webviewCallback:@"{errCode:1}"];
+        }];
     };
     
-    [weakSelf presentModalViewController:qrcodevc animated:YES];
-
+    //[weakSelf presentModalViewController:qrcodevc animated:YES];
+    [self presentViewController:qrcodevc animated:YES completion:nil];
 }
 
 -(void) webviewCallback:(NSString*)back {
