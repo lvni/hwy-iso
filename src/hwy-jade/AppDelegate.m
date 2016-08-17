@@ -21,7 +21,7 @@
     // Override point for customization after application launch.
     //注册微信
     ViewController *rootVC = [[ViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rootVC];
+    //UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rootVC];
     [WXApi registerApp:@"wxbbab02d24a62a8a2"];
     return YES;
 }
