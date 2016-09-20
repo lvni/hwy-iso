@@ -331,7 +331,8 @@ static CGFloat const width = 200.0;
     NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
     UIWebView* tmpwebview = [[UIWebView alloc] initWithFrame:CGRectZero];
     NSString* secretAgent = [tmpwebview stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
-    NSString *newUagent = [NSString stringWithFormat:@"%@ hwy/%@",secretAgent, version];
+    NSString* buildNo = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    NSString *newUagent = [NSString stringWithFormat:@"%@ hwy/%@ (%@) channel(100000)",secretAgent, version,buildNo];
     NSDictionary *dictionnary = [[NSDictionary alloc]initWithObjectsAndKeys:newUagent, @"UserAgent", nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
 }
