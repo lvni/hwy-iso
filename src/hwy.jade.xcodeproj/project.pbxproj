@@ -602,6 +602,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: WenLi Zheng (GL3BV3VAS3)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: WenLi Zheng (GL3BV3VAS3)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = GL3BV3VAS3;
 				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = "hwy-jade/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -613,7 +614,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = GZLiuYuan.jade;
 				PRODUCT_NAME = "洪五爷珠宝";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "da3087e6-38cf-44c0-89e2-e5c70bea24bf";
+				PROVISIONING_PROFILE_SPECIFIER = jadeProductionPF;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -625,6 +627,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: WenLi Zheng (GL3BV3VAS3)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: WenLi Zheng (GL3BV3VAS3)";
+				DEVELOPMENT_TEAM = GL3BV3VAS3;
 				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = "hwy-jade/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -636,7 +639,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = GZLiuYuan.jade;
 				PRODUCT_NAME = "洪五爷珠宝";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "da3087e6-38cf-44c0-89e2-e5c70bea24bf";
+				PROVISIONING_PROFILE_SPECIFIER = jadeProductionPF;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
