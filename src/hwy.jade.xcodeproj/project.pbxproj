@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A52D08521D912073007CB304 /* IMYWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = A52D084C1D912073007CB304 /* IMYWebView.m */; };
+		A52D08531D912073007CB304 /* IMY_NJKWebViewProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = A52D084F1D912073007CB304 /* IMY_NJKWebViewProgress.m */; };
+		A52D08541D912073007CB304 /* WYWeakScriptMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A52D08511D912073007CB304 /* WYWeakScriptMessageDelegate.m */; };
 		A53E1AED1D5C20F900D99242 /* Utiils.m in Sources */ = {isa = PBXBuildFile; fileRef = A53E1AEB1D5C20F800D99242 /* Utiils.m */; };
 		A53EBA971D62ACFB000F1C48 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = A53EBA951D62ACFB000F1C48 /* loading.gif */; };
 		A53EBA981D62ACFB000F1C48 /* loading.html in Resources */ = {isa = PBXBuildFile; fileRef = A53EBA961D62ACFB000F1C48 /* loading.html */; };
@@ -62,6 +65,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A52D084B1D912073007CB304 /* IMYWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMYWebView.h; sourceTree = "<group>"; };
+		A52D084C1D912073007CB304 /* IMYWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMYWebView.m; sourceTree = "<group>"; };
+		A52D084E1D912073007CB304 /* IMY_NJKWebViewProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMY_NJKWebViewProgress.h; sourceTree = "<group>"; };
+		A52D084F1D912073007CB304 /* IMY_NJKWebViewProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMY_NJKWebViewProgress.m; sourceTree = "<group>"; };
+		A52D08501D912073007CB304 /* WYWeakScriptMessageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYWeakScriptMessageDelegate.h; sourceTree = "<group>"; };
+		A52D08511D912073007CB304 /* WYWeakScriptMessageDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYWeakScriptMessageDelegate.m; sourceTree = "<group>"; };
 		A53E1AEB1D5C20F800D99242 /* Utiils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utiils.m; sourceTree = "<group>"; };
 		A53E1AEC1D5C20F800D99242 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		A53EBA951D62ACFB000F1C48 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
@@ -150,6 +159,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A52D084A1D912073007CB304 /* IMYWebView */ = {
+			isa = PBXGroup;
+			children = (
+				A52D084B1D912073007CB304 /* IMYWebView.h */,
+				A52D084C1D912073007CB304 /* IMYWebView.m */,
+				A52D084D1D912073007CB304 /* UIWebViewProgress */,
+				A52D08501D912073007CB304 /* WYWeakScriptMessageDelegate.h */,
+				A52D08511D912073007CB304 /* WYWeakScriptMessageDelegate.m */,
+			);
+			path = IMYWebView;
+			sourceTree = "<group>";
+		};
+		A52D084D1D912073007CB304 /* UIWebViewProgress */ = {
+			isa = PBXGroup;
+			children = (
+				A52D084E1D912073007CB304 /* IMY_NJKWebViewProgress.h */,
+				A52D084F1D912073007CB304 /* IMY_NJKWebViewProgress.m */,
+			);
+			path = UIWebViewProgress;
+			sourceTree = "<group>";
+		};
 		A53E1AE91D5C20F800D99242 /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,6 +285,7 @@
 		A5C9A5391D55928D00B22E28 /* hwy-jade */ = {
 			isa = PBXGroup;
 			children = (
+				A52D084A1D912073007CB304 /* IMYWebView */,
 				A53E1AE91D5C20F800D99242 /* include */,
 				A5D59DDE1D5880BF0075E116 /* view */,
 				A5C9A53D1D55928D00B22E28 /* AppDelegate.h */,
@@ -450,9 +481,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A52D08541D912073007CB304 /* WYWeakScriptMessageDelegate.m in Sources */,
+				A52D08521D912073007CB304 /* IMYWebView.m in Sources */,
 				A593F7CE1D640B68009C5D38 /* AVCaptureVideoPreviewLayer+Helper.m in Sources */,
 				A5C9A5421D55928D00B22E28 /* ViewController.m in Sources */,
 				A5C9A53F1D55928D00B22E28 /* AppDelegate.m in Sources */,
+				A52D08531D912073007CB304 /* IMY_NJKWebViewProgress.m in Sources */,
 				A5D59DE71D5881DB0075E116 /* HWebView.m in Sources */,
 				A593F7DA1D640B68009C5D38 /* SYQRCodeViewController.m in Sources */,
 				A5C9A53C1D55928D00B22E28 /* main.m in Sources */,

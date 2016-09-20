@@ -9,9 +9,10 @@
 #ifndef HWebView_h
 #define HWebView_h
 #import <UIKit/UIKit.h>
+#import "../IMYWebView/IMYWebView.h"
 
 
-@interface HWebView : UIWebView
+@interface HWebView : IMYWebView
 
 @property (nonatomic, weak) UIButton * backItem;
 @property (nonatomic,weak) UIView * headView;

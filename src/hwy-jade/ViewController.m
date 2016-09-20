@@ -152,7 +152,8 @@ static CGFloat const width = 200.0;
 }
 
 - (void )webViewDidStartLoad:(UIWebView  *)webView {
-    preHost = webview.request.URL.host;
+    //preHost = webview.request.URL.host;
+    preHost = webview.currentRequest.URL.host;
 }
 
 - (void) webViewDidFinishLoad:(UIWebView *)webView
