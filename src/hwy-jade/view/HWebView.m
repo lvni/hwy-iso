@@ -42,10 +42,7 @@
 
 -(void) setUa {
    
-    NSString* secretAgent = [self stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
-    NSString *newUagent = [NSString stringWithFormat:@"%@ hwy/3.5.2",secretAgent];
-    NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:newUagent, @"User-Agent", nil];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:dictionary];
+  
 
 }
 

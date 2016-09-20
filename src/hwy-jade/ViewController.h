@@ -13,13 +13,11 @@
 #import <AVFoundation/AVFoundation.h>
 //#define DEBUG 1
 
-#ifdef DEBUG
-#define PORTAL "http://192.168.1.161/webapp/index.html"
-#define HOST "192.168.1.161"
-#else
 #define HOST "app.hong5ye.com"
 #define PORTAL "http://app.hong5ye.com/webapp/index.html"
-#endif
+#define PORTAL_DEBUG "http://app.hong5ye.com/test/webapp/index.html"
+
+#define IOS8x ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0)
 
 @interface ViewController : UIViewController<UIWebViewDelegate>
 {
@@ -52,6 +50,8 @@
     UIButton* scanClose;
     UIView * scanArea;
     UILabel* scanTips;
+    
+    
     
 }
 -(void) onReq:(BaseReq*)req;

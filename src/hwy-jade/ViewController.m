@@ -13,7 +13,8 @@
 #import "SYQRCodeViewController/SYQRCodeViewController.h"
 static CGFloat const width = 200.0;
 @interface ViewController ()
-
+@property (nonatomic, strong) UIProgressView *progressView;
+@property (nonatomic, assign) NSUInteger loadCount;
 @end
 
 @implementation ViewController
@@ -32,8 +33,12 @@ static CGFloat const width = 200.0;
     
     //初始化webview大小
     webview = [[HWebView alloc] initWithFrame:CGRectMake(0.0f,statusBarHeight,self.view.bounds.size.width,self.view.bounds.size.height - statusBarHeight)];
+    _progressView = [[UIProgressView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 5)];
+    _progressView.progressTintColor = [UIColor colorWithRed:179 / 255.0 green:0 blue:17/255.0 alpha:1];
     NSString *s = @PORTAL;
+    [webview addSubview:_progressView];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:s]];
+    [webview addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
     [self.view addSubview:webview];
     [webview setDelegate:self];
     webview.scrollView.bounces = NO;
@@ -62,6 +67,42 @@ static CGFloat const width = 200.0;
     
 
 }
+
+- (void)observeValueForKeyPath:(NSString* )keyPath ofObject:(id)object change:(NSDictionary* )change context:(void *)context {
+    if ([keyPath isEqualToString:@"estimatedProgress"]) {
+        
+        self.progressView.progress = webview.estimatedProgress;
+    }
+    if (object == webview && [keyPath isEqualToString:@"estimatedProgress"]) {
+        CGFloat newprogress = [[change objectForKey:NSKeyValueChangeNewKey] doubleValue];
+        if (newprogress == 1) {
+            self.progressView.hidden = YES;
+            [self.progressView setProgress:0 animated:NO];
+        }else {
+            self.progressView.hidden = NO;
+            [self.progressView setProgress:newprogress animated:YES];
+        }
+    }
+}
+- (void)setLoadCount:(NSUInteger)loadCount {
+    _loadCount = loadCount;
+    
+    if (loadCount == 0) {
+        self.progressView.hidden = YES;
+        [self.progressView setProgress:0 animated:NO];
+    }else {
+        self.progressView.hidden = NO;
+        CGFloat oldP = self.progressView.progress;
+        CGFloat newP = (1.0 - oldP) / (loadCount + 1) + oldP;
+        if (newP > 0.95) {
+            newP = 0.95;
+        }
+        [self.progressView setProgress:newP animated:YES];
+        
+    }
+}
+
+
 -(void) showLoading{
     //显示loading样式，如果500ms没有加在完成的话
     if (loadingTimer == nil) {
@@ -151,19 +192,20 @@ static CGFloat const width = 200.0;
     //[self.view addSubview:statusBar]; //占位
 }
 
-- (void )webViewDidStartLoad:(UIWebView  *)webView {
+- (void )webViewDidStartLoad:(IMYWebView  *)webView {
     //preHost = webview.request.URL.host;
     preHost = webview.currentRequest.URL.host;
+    
 }
 
-- (void) webViewDidFinishLoad:(UIWebView *)webView
+- (void) webViewDidFinishLoad:(IMYWebView *)webView
 {
     //return;
     [self hideloading];
     
 }
 
-- (void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+- (void) webView:(IMYWebView *)webView didFailLoadWithError:(NSError *)error
 {
     NSLog(@"didFailLoadWithError:%@", error);
     [self hideloading];
@@ -172,8 +214,9 @@ static CGFloat const width = 200.0;
 
 
 
--(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+-(BOOL)webView:(IMYWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     //NSLog(@"yes :%@",[request allHTTPHeaderFields]);
+    
     NSURL *url = [request URL];
     NSString *scheme = [url scheme];
     NSString *contoller = [url host];
