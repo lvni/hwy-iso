@@ -56,5 +56,6 @@
 }
 -(void) onReq:(BaseReq*)req;
 -(void) onResp:(BaseResp*)resp ;
+-(Boolean) handleAlipay:(NSURL*)url;
 @end
 

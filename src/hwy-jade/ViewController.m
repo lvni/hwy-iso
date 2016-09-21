@@ -11,6 +11,8 @@
 #import "WXApi.h"
 #import "Const.h"
 #import "SYQRCodeViewController/SYQRCodeViewController.h"
+#import <AlipaySDK/AlipaySDK.h>
+
 static CGFloat const width = 200.0;
 @interface ViewController ()
 @property (nonatomic, strong) UIProgressView *progressView;
@@ -37,7 +39,11 @@ static CGFloat const width = 200.0;
     _progressView.progressTintColor = [UIColor colorWithRed:179 / 255.0 green:0 blue:17/255.0 alpha:1];
     NSString *s = @PORTAL;
     [webview addSubview:_progressView];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:s]];
+    //NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:s]];
+    //NSString *cookie = [webview readCurrentCookie:s];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:s]];
+    [self setCookie:officeHost];
+    //[request addValue:cookie forHTTPHeaderField:@"Cookie"];
     [webview addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
     [self.view addSubview:webview];
     [webview setDelegate:self];
@@ -106,10 +112,10 @@ static CGFloat const width = 200.0;
 -(void) showLoading{
     //显示loading样式，如果500ms没有加在完成的话
     if (loadingTimer == nil) {
-        loadingTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(loadingShow:) userInfo:nil repeats:NO];
+        loadingTimer = [NSTimer scheduledTimerWithTimeInterval:0.8 target:self selector:@selector(loadingShow:) userInfo:nil repeats:NO];
     } else {
         [loadingTimer invalidate];
-        [loadingTimer setFireDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
+        [loadingTimer setFireDate:[NSDate dateWithTimeIntervalSinceNow:0.8]];
     }
 }
 
@@ -120,6 +126,21 @@ static CGFloat const width = 200.0;
 
 - (void)loadingShow:(NSTimer*) timer{
     loading.hidden = NO;
+}
+
+/**
+ * 无网下的错误提示
+ **/
+- (void)showNetError: (NSString*)url {
+    NSString *filePath = [[NSBundle mainBundle]pathForResource:@"error" ofType:@"html"];
+    NSError *error;
+    
+    NSString *textFileContents = [NSString stringWithContentsOfFile:filePath
+                                encoding:NSUTF8StringEncoding error: & error];
+    //NSString *firlUri = [NSString stringWithFormat:@"%@?url=%@", filePath, url];
+    if(textFileContents){
+        [webview loadHTMLString:textFileContents baseURL:url];
+    }
 }
 
 -(void) initNaviBar {
@@ -202,6 +223,11 @@ static CGFloat const width = 200.0;
 {
     //return;
     [self hideloading];
+    NSHTTPCookieStorage *myCookie = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *cookie in [myCookie cookies]) {
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie]; // 保存
+    }
+
     
 }
 
@@ -209,11 +235,14 @@ static CGFloat const width = 200.0;
 {
     NSLog(@"didFailLoadWithError:%@", error);
     [self hideloading];
+    //[self showNetError:webview.currentRequest.URL.absoluteString];
     
 }
 
 
-
+/**
+ * 拦截url请求，处理自定义协议 hwy://
+ **/
 -(BOOL)webView:(IMYWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     //NSLog(@"yes :%@",[request allHTTPHeaderFields]);
     
@@ -244,6 +273,7 @@ static CGFloat const width = 200.0;
         jsCallback = [requestParams objectForKey:@"callback"];
         //login  share pay scan
         if ([contoller isEqualToString:@"login"] && [@"weixin" isEqualToString:[requestParams objectForKey:@"act"]]) {
+            [self checkWx];
             //构造SendAuthReq结构体
             if ([@"weixin" isEqualToString: [requestParams objectForKey:@"act"]]) {
                 SendAuthReq* req = [[SendAuthReq alloc ] init ];
@@ -258,7 +288,7 @@ static CGFloat const width = 200.0;
         if ([contoller isEqualToString:@"pay"] && [@"weixin" isEqualToString:[requestParams objectForKey:@"act"]]) {
             //微信支付
             
-            
+            [self checkWx];
             if (jsonObject ==nil && jsCallback != nil) {
                 NSString *jsExec = [NSString stringWithFormat:@"%@(%@)",jsCallback,@"{errCode:-1}"];
                 [webView stringByEvaluatingJavaScriptFromString:jsExec];
@@ -267,15 +297,27 @@ static CGFloat const width = 200.0;
             PayReq *request = [[PayReq alloc] init];
             request.partnerId = [jsonObject objectForKey:@"partnerid"];
             request.prepayId= [jsonObject objectForKey:@"prepayid"];
-            request.package = @"Sign=WXPay";
+            //request.package = @"Sign=WXPay";
+            request.package =[jsonObject objectForKey:@"package"];
             request.nonceStr= [jsonObject objectForKey:@"noncestr"];
             request.timeStamp = [[jsonObject objectForKey:@"timestamp"] intValue];
             request.sign= [jsonObject objectForKey:@"sign"];
             [WXApi sendReq:request];
         }
         
+        if ([contoller isEqualToString:@"pay"] && [@"alipay" isEqualToString:[requestParams objectForKey:@"act"]]) {
+            // NOTE: 调用支付结果开始支付
+            NSString* orderString = [requestParams objectForKey:@"orderStr"];
+            NSString *appScheme = @"hwy";
+            [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+                [self alipayCallback:jsCallback result:resultDic];
+                
+            }];
+        }
+        
         if ([contoller isEqualToString:@"share"]) {
             //分享
+            [self checkWx];
             shareContent = jsonObject;
             if ([@"close" isEqualToString:[requestParams objectForKey:@"act"]]) {
                 [self hideShareBox];
@@ -324,6 +366,13 @@ static CGFloat const width = 200.0;
     return YES;
 }
 
+- (void)checkWx {
+    if (![WXApi isWXAppInstalled]) {
+        //没有安装微信
+        kTipsAlert(@"没有安装微信");
+    }
+}
+
 -(void) timerFiredtoCloseShare:(NSTimer *)timer {
     [self hideShareBox];
 }
@@ -364,6 +413,7 @@ static CGFloat const width = 200.0;
     if (jsCallback) {
         NSString *callBackScript =[NSString stringWithFormat:@"%@(%@)", jsCallback, back];
         [webview stringByEvaluatingJavaScriptFromString:callBackScript];
+        jsCallback = nil;
     }
 }
 
@@ -552,4 +602,84 @@ static CGFloat const width = 200.0;
     return UIImageJPEGRepresentation(newImage, 0.8);
 }
 
+//将文件copy到tmp目录
+- (NSURL *)fileURLForBuggyWKWebView8:(NSURL *)fileURL {
+    NSError *error = nil;
+    if (!fileURL.fileURL || ![fileURL checkResourceIsReachableAndReturnError:&error]) {
+        return nil;
+    }
+    // Create "/temp/www" directory
+    NSFileManager *fileManager= [NSFileManager defaultManager];
+    NSURL *temDirURL = [[NSURL fileURLWithPath:NSTemporaryDirectory()] URLByAppendingPathComponent:@"www"];
+    [fileManager createDirectoryAtURL:temDirURL withIntermediateDirectories:YES attributes:nil error:&error];
+    
+    NSURL *dstURL = [temDirURL URLByAppendingPathComponent:fileURL.lastPathComponent];
+    // Now copy given file to the temp directory
+    [fileManager removeItemAtURL:dstURL error:&error];
+    [fileManager copyItemAtURL:fileURL toURL:dstURL error:&error];
+    // Files in "/temp/www" load flawlesly :)
+    return dstURL;
+}
+
+-(void) alipayCallback:(NSString* )callback
+                result:(NSDictionary*)resultDic {
+    if (!callback) {
+        callback = @"AppCall.aliPayBack";
+    }
+    [resultDic setValue:@"alipay" forKey:@"type"];
+    NSError * err;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:resultDic options:0 error:&err];
+    NSString * myString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    jsCallback = callback;
+    [self webviewCallback:myString];
+}
+//支付宝回调
+-(Boolean)handleAlipay:(NSURL*)url {
+    // 支付跳转支付宝钱包进行支付，处理支付结果
+    [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+        NSLog(@"result = %@",resultDic);
+        [self alipayCallback:jsCallback result:resultDic];
+    }];
+    
+    // 授权跳转支付宝钱包进行支付，处理支付结果
+    [[AlipaySDK defaultService] processAuth_V2Result:url standbyCallback:^(NSDictionary *resultDic) {
+        NSLog(@"result = %@",resultDic);
+        // 解析 auth code
+        NSString *result = resultDic[@"result"];
+        NSString *authCode = nil;
+        if (result.length>0) {
+            NSArray *resultArr = [result componentsSeparatedByString:@"&"];
+            for (NSString *subResult in resultArr) {
+                if (subResult.length > 10 && [subResult hasPrefix:@"auth_code="]) {
+                    authCode = [subResult substringFromIndex:10];
+                    break;
+                }
+            }
+        }
+        NSLog(@"授权结果 authCode = %@", authCode?:@"");
+    }];
+    return YES;
+}
+
+-(void) setCookie:(NSString*)host {
+    // 寻找URL为HOST的相关cookie，不用担心，步骤2已经自动为cookie设置好了相关的URL信息
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:host]]; // 这里的HOST是你web服务器的域名地址
+    // 比如你之前登录的网站地址是abc.com（当然前面要加http://，如果你服务器需要端口号也可以加上端口号），那么这里的HOST就是http://abc.com
+    
+    // 设置header，通过遍历cookies来一个一个的设置header
+    for (NSHTTPCookie *cookie in cookies){
+        
+        // cookiesWithResponseHeaderFields方法，需要为URL设置一个cookie为NSDictionary类型的header，注意NSDictionary里面的forKey需要是@"Set-Cookie"
+        NSArray *headeringCookie = [NSHTTPCookie cookiesWithResponseHeaderFields:
+                                    [NSDictionary dictionaryWithObject:
+                                     [[NSString alloc] initWithFormat:@"%@=%@",[cookie name],[cookie value]]
+                                                                forKey:@"Set-Cookie"]
+                                                                          forURL:[NSURL URLWithString:host]];
+        
+        // 通过setCookies方法，完成设置，这样只要一访问URL为HOST的网页时，会自动附带上设置好的header
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookies:headeringCookie
+                                                           forURL:[NSURL URLWithString:host]
+                                                  mainDocumentURL:nil];
+    }
+}
 @end

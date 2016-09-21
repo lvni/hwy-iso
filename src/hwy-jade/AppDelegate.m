@@ -49,13 +49,30 @@
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(nonnull NSURL *)url {
-    NSLog(@"openurl %@",url.absoluteString);
-    return [WXApi handleOpenURL:url delegate:self];
+    if ([url.host isEqualToString:@"safepay"]) {
+        UIViewController * rootcv = self.window.rootViewController;
+        if ([rootcv isKindOfClass:[ViewController class]]) {
+            ViewController * vc = (ViewController *)rootcv;
+            [vc handleAlipay:url ];
+        }
+        return YES;
+    } else {
+        return [WXApi handleOpenURL:url delegate:self];
+    }
+    
 }
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
-    NSLog(@"open %@",url.absoluteString);
-    return [WXApi handleOpenURL:url delegate:self];
+    if ([url.host isEqualToString:@"safepay"]) {
+        UIViewController * rootcv = self.window.rootViewController;
+        if ([rootcv isKindOfClass:[ViewController class]]) {
+            ViewController * vc = (ViewController *)rootcv;
+            [vc handleAlipay:url ];
+        }
+        return YES;
+    } else {
+        return [WXApi handleOpenURL:url delegate:self];
+    }
 }
 
 

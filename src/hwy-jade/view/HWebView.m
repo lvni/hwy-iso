@@ -46,6 +46,21 @@
 
 }
 
+// 保存数据到本地
+- (BOOL) SetLocalData:(NSString *)dataFile dataObject:(NSMutableDictionary *)dataObject{
+    // 设置路径,并保存
+    NSString *savePath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *saveFile = [savePath stringByAppendingPathComponent:dataFile];[NSKeyedArchiver archiveRootObject:dataObject toFile:saveFile];
+    return YES;
+}
+// 读取本地保存的数据
+- (NSMutableDictionary *) GetLocalData:(NSString *)dataFile {
+    // 按文件名来读取数据
+    NSString *savePath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *saveFile = [savePath stringByAppendingPathComponent:dataFile];
+    return [NSKeyedUnarchiver unarchiveObjectWithFile: saveFile];
+}
+
 
 @end
 
