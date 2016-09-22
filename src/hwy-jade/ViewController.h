@@ -57,5 +57,7 @@
 -(void) onReq:(BaseReq*)req;
 -(void) onResp:(BaseResp*)resp ;
 -(Boolean) handleAlipay:(NSURL*)url;
+-(void)registerPushToken:(NSString*)token;
+-(void)handelPushContent:(NSDictionary*)resultDic;
 @end
 

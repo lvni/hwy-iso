@@ -159,6 +159,11 @@
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void (^)())completionHandler{
     if([identifier isEqualToString:@"ACCEPT_IDENTIFIER"]){
         NSLog(@"ACCEPT_IDENTIFIER is clicked");
+        UIViewController * rootcv = self.window.rootViewController;
+        if ([rootcv isKindOfClass:[ViewController class]]) {
+            ViewController * vc = (ViewController *)rootcv;
+            [vc handelPushContent:userInfo];
+        }
     }
     
     completionHandler();
@@ -169,10 +174,15 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     //NSString * deviceTokenStr = [XGPush registerDevice:deviceToken];
-    
+    NSString * deviceTokenStr = nil;
     void (^successBlock)(void) = ^(void){
         //成功之后的处理
         NSLog(@"[XGPush Demo]register successBlock");
+        UIViewController * rootcv = self.window.rootViewController;
+        if ([rootcv isKindOfClass:[ViewController class]]) {
+            ViewController * vc = (ViewController *)rootcv;
+            [vc registerPushToken: deviceTokenStr];
+        }
     };
     
     void (^errorBlock)(void) = ^(void){
@@ -184,7 +194,7 @@
     [XGPush setAccount:@"test"];
     
     //注册设备
-    NSString * deviceTokenStr = [XGPush registerDevice:deviceToken successCallback:successBlock errorCallback:errorBlock];
+    deviceTokenStr = [XGPush registerDevice:deviceToken successCallback:successBlock errorCallback:errorBlock];
     
     //如果不需要回调
     //[XGPush registerDevice:deviceToken];

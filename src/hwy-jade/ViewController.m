@@ -50,9 +50,15 @@ static CGFloat const width = 200.0;
     webview.scrollView.bounces = NO;
     [webview loadRequest:request];
     //[webview initView];
-    
+    [self setUpWebviewEvent];
     [self setUpShare];
     [self setUpLoading];
+}
+
+-(void)setUpWebviewEvent {
+    UILongPressGestureRecognizer* longPressed = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressed:)];
+    longPressed.delegate = self;
+    [webview addGestureRecognizer:longPressed];
 }
 
 //设置loading
@@ -679,5 +685,77 @@ static CGFloat const width = 200.0;
                                                            forURL:[NSURL URLWithString:host]
                                                   mainDocumentURL:nil];
     }
+}
+/**
+ * 获取push注册的token，并传给H5
+ **/
+-(void)registerPushToken:(NSString*)token {
+    
+}
+
+/**
+ * 收到推送并点击
+ **/
+-(void)handelPushContent:(NSDictionary *)resultDic {
+    
+}
+
+- (void)longPressed:(UILongPressGestureRecognizer*)recognizer
+{
+    if (recognizer.state != UIGestureRecognizerStateBegan) {
+        return;
+    }
+    
+    CGPoint touchPoint = [recognizer locationInView:webview];
+    
+    NSString *imgURL = [NSString stringWithFormat:@"document.elementFromPoint(%f, %f).src", touchPoint.x, touchPoint.y];
+    NSString *urlToSave = [webview stringByEvaluatingJavaScriptFromString:imgURL];
+    
+    if (urlToSave.length == 0) {
+        return;
+    }
+    
+    [self showImageOptionsWithUrl:urlToSave];
+}
+
+- (void)showImageOptionsWithUrl:(NSString *)imageUrl
+{
+    UIActionSheet *sheet = [[UIActionSheet alloc] init];
+    [sheet addButtonWithTitle:@"保存图片"];
+
+    [sheet showFromRect:CGRectMake(0, self.view.bounds.size.height - 250, self.view.bounds.size.width, 250) inView:webview animated:YES];
+    
+}
+- (void)saveImageToDiskWithUrl:(NSString *)imageUrl
+{
+    NSURL *url = [NSURL URLWithString:imageUrl];
+    
+    NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:[NSOperationQueue new]];
+    
+    NSURLRequest *imgRequest = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30.0];
+    
+    NSURLSessionDownloadTask  *task = [session downloadTaskWithRequest:imgRequest completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error) {
+            return ;
+        }
+        
+        NSData * imageData = [NSData dataWithContentsOfURL:location];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            UIImage * image = [UIImage imageWithData:imageData];
+            
+            UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+        });
+    }];
+    
+    [task resume];
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+   
 }
 @end
