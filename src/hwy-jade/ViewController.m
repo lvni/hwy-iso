@@ -664,8 +664,6 @@ static CGFloat const width = 200.0;
 -(void) setCookie:(NSString*)host {
     // 寻找URL为HOST的相关cookie，不用担心，步骤2已经自动为cookie设置好了相关的URL信息
     NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:host]]; // 这里的HOST是你web服务器的域名地址
-    // 比如你之前登录的网站地址是abc.com（当然前面要加http://，如果你服务器需要端口号也可以加上端口号），那么这里的HOST就是http://abc.com
-    
     // 设置header，通过遍历cookies来一个一个的设置header
     for (NSHTTPCookie *cookie in cookies){
         

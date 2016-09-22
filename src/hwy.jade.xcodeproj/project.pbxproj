@@ -15,6 +15,7 @@
 		A50DF58E1D925B2800C5AC61 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A50DF58D1D925B2800C5AC61 /* AlipaySDK.bundle */; };
 		A50DF5901D925B3300C5AC61 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50DF58F1D925B3300C5AC61 /* AlipaySDK.framework */; };
 		A50DF5921D925B7E00C5AC61 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50DF5911D925B7E00C5AC61 /* CoreMotion.framework */; };
+		A525906D1D937B8A00C97F51 /* libXG-SDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A525906A1D937B8A00C97F51 /* libXG-SDK.a */; };
 		A52D08521D912073007CB304 /* IMYWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = A52D084C1D912073007CB304 /* IMYWebView.m */; };
 		A52D08531D912073007CB304 /* IMY_NJKWebViewProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = A52D084F1D912073007CB304 /* IMY_NJKWebViewProgress.m */; };
 		A52D08541D912073007CB304 /* WYWeakScriptMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A52D08511D912073007CB304 /* WYWeakScriptMessageDelegate.m */; };
@@ -74,7 +75,6 @@
 
 /* Begin PBXFileReference section */
 		A50DF5751D922B5700C5AC61 /* error.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = error.html; sourceTree = "<group>"; };
-		A50DF57E1D92551700C5AC61 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlipaySDK.framework; path = ../AlipaySDK.framework; sourceTree = "<group>"; };
 		A50DF5801D92553500C5AC61 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A50DF5821D92554400C5AC61 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		A50DF5841D92555A00C5AC61 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -82,6 +82,9 @@
 		A50DF58D1D925B2800C5AC61 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		A50DF58F1D925B3300C5AC61 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		A50DF5911D925B7E00C5AC61 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		A525906A1D937B8A00C97F51 /* libXG-SDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libXG-SDK.a"; sourceTree = "<group>"; };
+		A525906B1D937B8A00C97F51 /* XGPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGPush.h; sourceTree = "<group>"; };
+		A525906C1D937B8A00C97F51 /* XGSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGSetting.h; sourceTree = "<group>"; };
 		A52D084B1D912073007CB304 /* IMYWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMYWebView.h; sourceTree = "<group>"; };
 		A52D084C1D912073007CB304 /* IMYWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMYWebView.m; sourceTree = "<group>"; };
 		A52D084E1D912073007CB304 /* IMY_NJKWebViewProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMY_NJKWebViewProgress.h; sourceTree = "<group>"; };
@@ -162,6 +165,7 @@
 				A5BBD11F1D5C61140075C4A0 /* CoreGraphics.framework in Frameworks */,
 				A5BBD1171D5C603D0075C4A0 /* SystemConfiguration.framework in Frameworks */,
 				A5BBD1141D5C5A000075C4A0 /* libWeChatSDK.a in Frameworks */,
+				A525906D1D937B8A00C97F51 /* libXG-SDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,9 +195,18 @@
 				A50DF5841D92555A00C5AC61 /* CFNetwork.framework */,
 				A50DF5821D92554400C5AC61 /* CoreText.framework */,
 				A50DF5801D92553500C5AC61 /* QuartzCore.framework */,
-				A50DF57E1D92551700C5AC61 /* AlipaySDK.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A52590691D937B8A00C97F51 /* push */ = {
+			isa = PBXGroup;
+			children = (
+				A525906A1D937B8A00C97F51 /* libXG-SDK.a */,
+				A525906B1D937B8A00C97F51 /* XGPush.h */,
+				A525906C1D937B8A00C97F51 /* XGSetting.h */,
+			);
+			path = push;
 			sourceTree = "<group>";
 		};
 		A52D084A1D912073007CB304 /* IMYWebView */ = {
@@ -325,6 +338,7 @@
 		A5C9A5391D55928D00B22E28 /* hwy-jade */ = {
 			isa = PBXGroup;
 			children = (
+				A52590691D937B8A00C97F51 /* push */,
 				A52D084A1D912073007CB304 /* IMYWebView */,
 				A53E1AE91D5C20F800D99242 /* include */,
 				A5D59DDE1D5880BF0075E116 /* view */,
@@ -691,6 +705,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(PROJECT_DIR)/hwy-jade/include/weixin\"",
+					"\"$(PROJECT_DIR)/hwy-jade/push\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = GZLiuYuan.jade;
@@ -721,6 +736,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(PROJECT_DIR)/hwy-jade/include/weixin\"",
+					"\"$(PROJECT_DIR)/hwy-jade/push\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = GZLiuYuan.jade;
