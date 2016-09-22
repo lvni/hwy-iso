@@ -72,7 +72,7 @@
     [WXApi registerApp:@"wxbbab02d24a62a8a2"];
     
     //注册腾讯信鸽推送
-    [XGPush startApp:2200230095 appKey:@"IMD757W97PUL"];
+    [XGPush startApp:2200230560 appKey:@"IDP8J2916ZTK"];
     [XGPush handleLaunching:launchOptions];
     
     float sysVer = [[[UIDevice currentDevice] systemVersion] floatValue];
