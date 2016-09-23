@@ -14,8 +14,8 @@
 //#define DEBUG 1
 
 #define HOST "app.hong5ye.com"
-//#define PORTAL "http://app.hong5ye.com/webapp/index.html"
-#define PORTAL "http://app.hong5ye.com/test/webapp/index.html"
+#define PORTAL "http://app.hong5ye.com/webapp/index.html"
+#define PORTAL_DEBUG "http://app.hong5ye.com/test/webapp/index.html"
 
 #define IOS8x ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0)
 

@@ -383,8 +383,17 @@
             if ([url rangeOfString: @"itunes"].location != NSNotFound) {
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
             }
-            
 
+        }
+        if ([contoller isEqualToString:@"setDebug"]) {
+            NSString* turl = [requestParams objectForKey:@"tag"];
+            if (turl == nil || [turl rangeOfString:@"http"].location != 0) {
+                turl = @PORTAL_DEBUG;
+            }
+            kTipsAlert(@"您目前处于测试环境，请谨慎操作");
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:turl]];
+            [webview loadRequest:request];
+            
         }
         //二维码扫描
         if ([contoller isEqualToString:@"scan"]) {
