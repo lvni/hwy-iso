@@ -19,7 +19,7 @@
 
 #define IOS8x ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0)
 
-@interface ViewController : UIViewController<UIWebViewDelegate>
+@interface ViewController : UIViewController<UIWebViewDelegate,IMYWebViewDelegate>
 {
     
     //返回和关闭按钮
@@ -55,7 +55,7 @@
     NSString* deviceTokenStr; //设备用于推送的token
     Boolean isDevRegister; //当前是否已经注册了设备
     
-    
+    NSString* imgStr;
     
 }
 -(void) onReq:(BaseReq*)req;

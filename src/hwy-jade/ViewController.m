@@ -13,7 +13,6 @@
 #import "SYQRCodeViewController/SYQRCodeViewController.h"
 #import <AlipaySDK/AlipaySDK.h>
 
-static CGFloat const width = 200.0;
 @interface ViewController ()
 @property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, assign) NSUInteger loadCount;
@@ -50,15 +49,8 @@ static CGFloat const width = 200.0;
     webview.scrollView.bounces = NO;
     [webview loadRequest:request];
     //[webview initView];
-    [self setUpWebviewEvent];
     [self setUpShare];
     [self setUpLoading];
-}
-
--(void)setUpWebviewEvent {
-    UILongPressGestureRecognizer* longPressed = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressed:)];
-    longPressed.delegate = self;
-    [webview addGestureRecognizer:longPressed];
 }
 
 //设置loading
@@ -145,7 +137,7 @@ static CGFloat const width = 200.0;
                                 encoding:NSUTF8StringEncoding error: & error];
     //NSString *firlUri = [NSString stringWithFormat:@"%@?url=%@", filePath, url];
     if(textFileContents){
-        [webview loadHTMLString:textFileContents baseURL:url];
+        [webview loadHTMLString:textFileContents baseURL:[NSURL URLWithString:url]];
     }
 }
 
@@ -311,7 +303,7 @@ static CGFloat const width = 200.0;
             [self checkWx];
             if (jsonObject ==nil && jsCallback != nil) {
                 NSString *jsExec = [NSString stringWithFormat:@"%@(%@)",jsCallback,@"{errCode:-1}"];
-                [webView stringByEvaluatingJavaScriptFromString:jsExec];
+                [self webviewCallback:jsExec];
                 return NO;
             }
             PayReq *request = [[PayReq alloc] init];
@@ -445,7 +437,7 @@ static CGFloat const width = 200.0;
     UIWebView* tmpwebview = [[UIWebView alloc] initWithFrame:CGRectZero];
     NSString* secretAgent = [tmpwebview stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
     NSString* buildNo = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-    NSString *newUagent = [NSString stringWithFormat:@"%@ hwy/%@ (%@) channel(100000)",secretAgent, version,buildNo];
+    NSString *newUagent = [NSString stringWithFormat:@"%@ hwy/%@ (%@) channel(200000)",secretAgent, version,buildNo];
     NSDictionary *dictionnary = [[NSDictionary alloc]initWithObjectsAndKeys:newUagent, @"UserAgent", nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
 }
@@ -456,7 +448,6 @@ static CGFloat const width = 200.0;
 
 -(void) onResp:(BaseResp*)resp {
     
-    NSLog(@"weixin back %@",[resp errStr]);
     if ([resp isKindOfClass: [PayResp class]]){
         //支付回调
         PayResp* response = (PayResp*)resp;
@@ -464,8 +455,8 @@ static CGFloat const width = 200.0;
         //有回调
 
         NSString * jsString = [NSString stringWithFormat:@"{errCode:%d}",response.errCode];
-        NSString * callback = [NSString stringWithFormat:@"%@(%@)",jsCallback, jsString];
-        [webview stringByEvaluatingJavaScriptFromString:callback];
+        //NSString * callback = [NSString stringWithFormat:@"%@(%@)",jsCallback, jsString];
+        [self webviewCallback:jsString];
     }
     
     //登陆回调
@@ -485,8 +476,8 @@ static CGFloat const width = 200.0;
             //有回调
             NSData *data=[NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:nil];
             NSString * jsString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSString * callback = [NSString stringWithFormat:@"%@(%@)",jsCallback, jsString];
-            [webview stringByEvaluatingJavaScriptFromString:callback];
+            
+            [self webviewCallback:jsString];
             
         }
     }
@@ -495,8 +486,7 @@ static CGFloat const width = 200.0;
     if ([resp isKindOfClass:[SendMessageToWXResp class]]) {
         SendMessageToWXResp* response = (SendMessageToWXResp*)resp;
         NSString * jsString = [NSString stringWithFormat:@"{errCode:%d}",response.errCode];
-        NSString * callback = [NSString stringWithFormat:@"%@(%@)",jsCallback, jsString];
-        [webview stringByEvaluatingJavaScriptFromString:callback];
+        [self webviewCallback:jsString];
     }
 }
 
@@ -729,64 +719,6 @@ static CGFloat const width = 200.0;
     }
 }
 
-- (void)longPressed:(UILongPressGestureRecognizer*)recognizer
-{
-    if (recognizer.state != UIGestureRecognizerStateBegan) {
-        return;
-    }
-    
-    CGPoint touchPoint = [recognizer locationInView:webview];
-    
-    NSString *imgURL = [NSString stringWithFormat:@"document.elementFromPoint(%f, %f).src", touchPoint.x, touchPoint.y];
-    NSString *urlToSave = [webview stringByEvaluatingJavaScriptFromString:imgURL];
-    
-    if (urlToSave.length == 0) {
-        return;
-    }
-    
-    [self showImageOptionsWithUrl:urlToSave];
-}
-
-- (void)showImageOptionsWithUrl:(NSString *)imageUrl
-{
-    UIActionSheet *sheet = [[UIActionSheet alloc] init];
-    [sheet addButtonWithTitle:@"保存图片"];
-
-    [sheet showFromRect:CGRectMake(0, self.view.bounds.size.height - 250, self.view.bounds.size.width, 250) inView:webview animated:YES];
-    
-}
-- (void)saveImageToDiskWithUrl:(NSString *)imageUrl
-{
-    NSURL *url = [NSURL URLWithString:imageUrl];
-    
-    NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:[NSOperationQueue new]];
-    
-    NSURLRequest *imgRequest = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30.0];
-    
-    NSURLSessionDownloadTask  *task = [session downloadTaskWithRequest:imgRequest completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if (error) {
-            return ;
-        }
-        
-        NSData * imageData = [NSData dataWithContentsOfURL:location];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            UIImage * image = [UIImage imageWithData:imageData];
-            
-            UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
-        });
-    }];
-    
-    [task resume];
-}
-
-- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
-{
-   
-}
 
 -(NSString*)DataTOjsonString:(id)object
 {
