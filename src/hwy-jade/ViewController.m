@@ -12,6 +12,7 @@
 #import "Const.h"
 #import "SYQRCodeViewController/SYQRCodeViewController.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import "XGPush.h"
 
 @interface ViewController ()
 @property (nonatomic, strong) UIProgressView *progressView;
@@ -367,7 +368,24 @@
             }
             
         }
+        NSString *tag = nil;
+        if ([contoller isEqualToString:@"setPushTag"]) {
+            tag = [requestParams objectForKey:@"tag"];
+            [XGPush setTag:tag];
+        }
         
+        if ([contoller isEqualToString:@"removePushTag"]) {
+            tag = [requestParams objectForKey:@"tag"];
+            [XGPush delTag:tag];
+        }
+        if ([contoller isEqualToString:@"update"]) {
+            NSString *url = [jsonObject valueForKey:@"url"];
+            if ([url rangeOfString: @"itunes"].location != NSNotFound) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+            }
+            
+
+        }
         //二维码扫描
         if ([contoller isEqualToString:@"scan"]) {
             NSLog(@"二维码扫描");
