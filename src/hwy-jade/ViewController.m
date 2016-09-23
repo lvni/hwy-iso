@@ -416,9 +416,9 @@
 }
 
 - (void)checkWx {
-    if (![WXApi isWXAppInstalled]) {
+    if (!([WXApi isWXAppInstalled] || [WXApi isWXAppSupportApi])) {
         //没有安装微信
-        kTipsAlert(@"没有安装微信");
+        //kTipsAlert(@"没有安装微信");
     }
 }
 
