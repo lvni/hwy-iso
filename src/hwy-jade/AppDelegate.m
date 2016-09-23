@@ -73,7 +73,13 @@
     
     //注册腾讯信鸽推送
     [XGPush startApp:2200230560 appKey:@"IDP8J2916ZTK"];
+    
+    if ([launchOptions objectForKey:@"aps"] != nil) {
+        //推送通知了启动
+        [self handelPush:launchOptions pushType:0];
+    }
     [XGPush handleLaunching:launchOptions];
+    //NSLog(@"[XGPush lvni]%@",launchOptions);
     
     float sysVer = [[[UIDevice currentDevice] systemVersion] floatValue];
     if(sysVer < 8){
@@ -159,11 +165,7 @@
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void (^)())completionHandler{
     if([identifier isEqualToString:@"ACCEPT_IDENTIFIER"]){
         NSLog(@"ACCEPT_IDENTIFIER is clicked");
-        UIViewController * rootcv = self.window.rootViewController;
-        if ([rootcv isKindOfClass:[ViewController class]]) {
-            ViewController * vc = (ViewController *)rootcv;
-            [vc handelPushContent:userInfo];
-        }
+        
     }
     
     completionHandler();
@@ -176,13 +178,7 @@
     //NSString * deviceTokenStr = [XGPush registerDevice:deviceToken];
     NSString * deviceTokenStr = nil;
     void (^successBlock)(void) = ^(void){
-        //成功之后的处理
-        NSLog(@"[XGPush Demo]register successBlock");
-        UIViewController * rootcv = self.window.rootViewController;
-        if ([rootcv isKindOfClass:[ViewController class]]) {
-            ViewController * vc = (ViewController *)rootcv;
-            [vc registerPushToken: deviceTokenStr];
-        }
+
     };
     
     void (^errorBlock)(void) = ^(void){
@@ -191,11 +187,16 @@
     };
     
     // 设置账号 测试用
-    [XGPush setAccount:@"test"];
+    [XGPush setAccount:@"hwy_dev"];
     
     //注册设备
     deviceTokenStr = [XGPush registerDevice:deviceToken successCallback:successBlock errorCallback:errorBlock];
-    
+    UIViewController * rootcv = self.window.rootViewController;
+    if ([rootcv isKindOfClass:[ViewController class]]) {
+        ViewController * vc = (ViewController *)rootcv;
+        NSLog(@"拿到注册设备 %@", deviceTokenStr);
+        [vc registerPushToken: deviceTokenStr];
+    }
     //如果不需要回调
     //[XGPush registerDevice:deviceToken];
     
@@ -214,6 +215,12 @@
 
 - (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
 {
+    NSLog(@"[XGPush lvni]%@",userInfo);
+    //if(userInfo) {
+        //[userInfo setValue:@"true" forKey:@"app_runing"];
+    //}
+    
+    [self handelPush:userInfo pushType:1];
     //推送反馈(app运行时)
     [XGPush handleReceiveNotification:userInfo];
     
@@ -234,6 +241,14 @@
     if ([rootcv isKindOfClass:[ViewController class]]) {
         ViewController * vc = (ViewController *)rootcv;
         [vc onResp: resp ];
+    }
+}
+
+-(void) handelPush:(NSDictionary*)userInfo pushType:(int) type{
+    UIViewController * rootcv = self.window.rootViewController;
+    if ([rootcv isKindOfClass:[ViewController class]]) {
+        ViewController * vc = (ViewController *)rootcv;
+        [vc handelPushContent:userInfo pushType:type];
     }
 }
 

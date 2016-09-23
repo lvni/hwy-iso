@@ -14,8 +14,8 @@
 //#define DEBUG 1
 
 #define HOST "app.hong5ye.com"
-#define PORTAL "http://app.hong5ye.com/webapp/index.html"
-#define PORTAL_DEBUG "http://app.hong5ye.com/test/webapp/index.html"
+//#define PORTAL "http://app.hong5ye.com/webapp/index.html"
+#define PORTAL "http://app.hong5ye.com/test/webapp/index.html"
 
 #define IOS8x ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0)
 
@@ -36,6 +36,8 @@
     NSString *officeHost;
     NSString *preHost;
     NSString *jsCallback ;
+    NSString *jsParams;
+    
     float statusBarHeight;
     NSDictionary *shareContent;
     NSTimer *timer;
@@ -50,6 +52,8 @@
     UIButton* scanClose;
     UIView * scanArea;
     UILabel* scanTips;
+    NSString* deviceTokenStr; //设备用于推送的token
+    Boolean isDevRegister; //当前是否已经注册了设备
     
     
     
@@ -58,6 +62,6 @@
 -(void) onResp:(BaseResp*)resp ;
 -(Boolean) handleAlipay:(NSURL*)url;
 -(void)registerPushToken:(NSString*)token;
--(void)handelPushContent:(NSDictionary*)resultDic;
+-(void)handelPushContent:(NSDictionary*)resultDic pushType:(int)type;
 @end
 

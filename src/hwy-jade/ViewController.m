@@ -25,7 +25,7 @@ static CGFloat const width = 200.0;
     [super viewDidLoad];
     //获取状态栏的高度
     
-    
+    isDevRegister = NO;
     officeHost=@HOST;
     
     // Do any additional setup after loading the view, typically from a nib.
@@ -233,8 +233,21 @@ static CGFloat const width = 200.0;
     for (NSHTTPCookie *cookie in [myCookie cookies]) {
         [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie]; // 保存
     }
-
     
+    if (isDevRegister == NO && deviceTokenStr != nil) {
+        //通知h5，注册当前设备
+        jsCallback = @"AppCall.deviceRegister";
+        NSString *param = [NSString stringWithFormat:@"{token:'%@'}", deviceTokenStr];
+        [self webviewCallback: param];
+        isDevRegister = YES;
+    }
+    
+    //有些js回调因为app刚启动，页面尚未加载，所以设置暂存在全局变量
+    //TO-DO 可以优化成更通用优雅的方式,支持多次js调用
+    if (jsCallback != nil && jsParams != nil) {
+        [self webviewCallback: jsParams];
+        jsParams = nil;
+    }
 }
 
 - (void) webView:(IMYWebView *)webView didFailLoadWithError:(NSError *)error
@@ -417,7 +430,7 @@ static CGFloat const width = 200.0;
 
 -(void) webviewCallback:(NSString*)back {
     if (jsCallback) {
-        NSString *callBackScript =[NSString stringWithFormat:@"%@(%@)", jsCallback, back];
+        NSString *callBackScript =[NSString stringWithFormat:@"%@ && %@(%@)",jsCallback, jsCallback, back];
         [webview stringByEvaluatingJavaScriptFromString:callBackScript];
         jsCallback = nil;
     }
@@ -690,14 +703,27 @@ static CGFloat const width = 200.0;
  * 获取push注册的token，并传给H5
  **/
 -(void)registerPushToken:(NSString*)token {
-    
+    NSLog(@"register device to h5 [%@]", token);
+    deviceTokenStr = token;
 }
 
 /**
  * 收到推送并点击
  **/
--(void)handelPushContent:(NSDictionary *)resultDic {
+-(void)handelPushContent:(NSDictionary *)resultDic pushType:(int) type{
+   
+    jsCallback = @"AppCall.pushBack";
+    NSMutableDictionary __block *wipeOutListDict = [resultDic mutableCopy];
+    [wipeOutListDict setValue:[NSNumber numberWithInteger:type] forKey:@"in_app"];
+    NSString *jsonString = [self DataTOjsonString:wipeOutListDict];
     
+    if (type == 1) {
+        //app正在运行，则直接调用webiew的方法
+        [self webviewCallback:jsonString];
+    } else {
+        //点击通知栏启动app，则等网页加载完再执行
+        jsParams = jsonString;
+    }
 }
 
 - (void)longPressed:(UILongPressGestureRecognizer*)recognizer
@@ -757,5 +783,20 @@ static CGFloat const width = 200.0;
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
    
+}
+
+-(NSString*)DataTOjsonString:(id)object
+{
+    NSString *jsonString = nil;
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:object
+                                                       options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
+                                                         error:&error];
+    if (! jsonData) {
+        NSLog(@"Got an error: %@", error);
+    } else {
+        jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    }
+    return jsonString;
 }
 @end
