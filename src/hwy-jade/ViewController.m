@@ -384,6 +384,7 @@
                 turl = @PORTAL_DEBUG;
             }
             kTipsAlert(@"您目前处于测试环境，请谨慎操作");
+            [XGPush setAccount:@"hwy_test"];
             NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:turl]];
             [webview loadRequest:request];
             

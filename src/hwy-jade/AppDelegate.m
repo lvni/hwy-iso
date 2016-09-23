@@ -201,7 +201,7 @@
     };
     
     // 设置账号 测试用
-    [XGPush setAccount:@"hwy_dev"];
+    //[XGPush setAccount:@"hwy_dev"];
     
     //注册设备
     deviceTokenStr = [XGPush registerDevice:deviceToken successCallback:successBlock errorCallback:errorBlock];
