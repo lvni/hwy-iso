@@ -62,7 +62,20 @@
 - (void)registerPush{
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
 }
-
+-(NSString*)DataTOjsonString:(id)object
+{
+    NSString *jsonString = nil;
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:object
+                                                       options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
+                                                         error:&error];
+    if (! jsonData) {
+        NSLog(@"Got an error: %@", error);
+    } else {
+        jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    }
+    return jsonString;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -72,11 +85,11 @@
     [WXApi registerApp:@"wxbbab02d24a62a8a2"];
     
     //注册腾讯信鸽推送
+    
     [XGPush startApp:2200230560 appKey:@"IDP8J2916ZTK"];
     
-    if ([launchOptions objectForKey:@"aps"] != nil) {
-        //推送通知了启动
-        [self handelPush:launchOptions pushType:0];
+    if (launchOptions != nil && [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]) {
+        [self handelPush:(NSDictionary*)[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey] pushType:0];
     }
     [XGPush handleLaunching:launchOptions];
     //NSLog(@"[XGPush lvni]%@",launchOptions);
@@ -194,7 +207,6 @@
     UIViewController * rootcv = self.window.rootViewController;
     if ([rootcv isKindOfClass:[ViewController class]]) {
         ViewController * vc = (ViewController *)rootcv;
-        NSLog(@"拿到注册设备 %@", deviceTokenStr);
         [vc registerPushToken: deviceTokenStr];
     }
     //如果不需要回调
@@ -215,7 +227,6 @@
 
 - (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
 {
-    NSLog(@"[XGPush lvni]%@",userInfo);
     //if(userInfo) {
         //[userInfo setValue:@"true" forKey:@"app_runing"];
     //}

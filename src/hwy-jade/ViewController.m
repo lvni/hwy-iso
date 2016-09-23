@@ -244,7 +244,8 @@ static CGFloat const width = 200.0;
     
     //有些js回调因为app刚启动，页面尚未加载，所以设置暂存在全局变量
     //TO-DO 可以优化成更通用优雅的方式,支持多次js调用
-    if (jsCallback != nil && jsParams != nil) {
+    if (jsParams != nil) {
+        jsCallback = @"AppCall.pushBack";
         [self webviewCallback: jsParams];
         jsParams = nil;
     }
@@ -716,12 +717,14 @@ static CGFloat const width = 200.0;
     NSMutableDictionary __block *wipeOutListDict = [resultDic mutableCopy];
     [wipeOutListDict setValue:[NSNumber numberWithInteger:type] forKey:@"in_app"];
     NSString *jsonString = [self DataTOjsonString:wipeOutListDict];
-    
+    NSLog(@"push info %@", jsonString);
     if (type == 1) {
         //app正在运行，则直接调用webiew的方法
         [self webviewCallback:jsonString];
     } else {
         //点击通知栏启动app，则等网页加载完再执行
+         //[self webviewCallback:jsonString];
+        //kTipsAlert(jsonString);
         jsParams = jsonString;
     }
 }
