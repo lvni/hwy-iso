@@ -56,11 +56,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hwy-jade/ViewController.m"
-            timestampString = "496309358.307156"
+            timestampString = "496309658.556266"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "275"
-            endingLineNumber = "275"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
             landmarkName = "-setStatusBar"
             landmarkType = "7">
          </BreakpointContent>
@@ -88,11 +88,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hwy-jade/ViewController.m"
-            timestampString = "496309358.307156"
+            timestampString = "496309658.556266"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "274"
-            endingLineNumber = "274"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
             landmarkName = "-setStatusBar"
             landmarkType = "7">
          </BreakpointContent>
@@ -104,11 +104,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hwy-jade/ViewController.m"
-            timestampString = "496309358.307156"
+            timestampString = "496309658.556266"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "222"
-            endingLineNumber = "222"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
             landmarkName = "-initNaviBar"
             landmarkType = "7">
          </BreakpointContent>
@@ -136,11 +136,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hwy-jade/ViewController.m"
-            timestampString = "496309358.307156"
+            timestampString = "496309658.556266"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "257"
-            endingLineNumber = "257"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
             landmarkName = "-restWebViewHeight"
             landmarkType = "7">
          </BreakpointContent>
@@ -152,11 +152,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hwy-jade/ViewController.m"
-            timestampString = "496309358.307156"
+            timestampString = "496309658.556266"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "283"
-            endingLineNumber = "283"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
             landmarkName = "-webViewDidFinishLoad:"
             landmarkType = "7">
          </BreakpointContent>
@@ -216,11 +216,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hwy-jade/ViewController.m"
-            timestampString = "496309358.307156"
+            timestampString = "496310081.819214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "613"
-            endingLineNumber = "613"
+            startingLineNumber = "560"
+            endingLineNumber = "560"
             landmarkName = "-showShareBox"
             landmarkType = "7">
          </BreakpointContent>
@@ -232,11 +232,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hwy-jade/ViewController.m"
-            timestampString = "496309358.307156"
+            timestampString = "496310081.819214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "620"
-            endingLineNumber = "620"
+            startingLineNumber = "567"
+            endingLineNumber = "567"
             landmarkName = "-shareWxClick:"
             landmarkType = "7">
          </BreakpointContent>
@@ -248,11 +248,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hwy-jade/ViewController.m"
-            timestampString = "496309358.307156"
+            timestampString = "496310081.819214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "544"
-            endingLineNumber = "544"
+            startingLineNumber = "491"
+            endingLineNumber = "491"
             landmarkName = "-onResp:"
             landmarkType = "7">
          </BreakpointContent>
@@ -328,11 +328,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hwy-jade/ViewController.m"
-            timestampString = "496309358.307156"
+            timestampString = "496309658.556266"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "278"
-            endingLineNumber = "278"
+            startingLineNumber = "215"
+            endingLineNumber = "215"
             landmarkName = "-webViewDidStartLoad:"
             landmarkType = "7">
          </BreakpointContent>
@@ -344,11 +344,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hwy-jade/ViewController.m"
-            timestampString = "496309358.307156"
+            timestampString = "496309658.556266"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "199"
-            endingLineNumber = "199"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
             landmarkName = "-showNetError:"
             landmarkType = "7">
          </BreakpointContent>
@@ -360,11 +360,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hwy-jade/ViewController.m"
-            timestampString = "496309358.307156"
+            timestampString = "496310081.819214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "386"
-            endingLineNumber = "386"
+            startingLineNumber = "333"
+            endingLineNumber = "333"
             landmarkName = "-webView:shouldStartLoadWithRequest:navigationType:"
             landmarkType = "7">
             <Locations>
@@ -440,11 +440,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hwy-jade/ViewController.m"
-            timestampString = "496309358.307156"
+            timestampString = "496310081.819214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "744"
-            endingLineNumber = "744"
+            startingLineNumber = "691"
+            endingLineNumber = "691"
             landmarkName = "-setCookie:"
             landmarkType = "7">
          </BreakpointContent>
@@ -456,11 +456,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hwy-jade/ViewController.m"
-            timestampString = "496309358.307156"
+            timestampString = "496310081.819214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "740"
-            endingLineNumber = "740"
+            startingLineNumber = "687"
+            endingLineNumber = "687"
             landmarkName = "-setCookie:"
             landmarkType = "7">
          </BreakpointContent>
@@ -472,11 +472,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hwy-jade/ViewController.m"
-            timestampString = "496309358.307156"
+            timestampString = "496310081.819214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "745"
-            endingLineNumber = "745"
+            startingLineNumber = "692"
+            endingLineNumber = "692"
             landmarkName = "-setCookie:"
             landmarkType = "7">
          </BreakpointContent>
@@ -488,11 +488,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hwy-jade/ViewController.m"
-            timestampString = "496309358.307156"
+            timestampString = "496309658.556266"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "294"
-            endingLineNumber = "294"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
             landmarkName = "-webViewDidFinishLoad:"
             landmarkType = "7">
          </BreakpointContent>
@@ -504,11 +504,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hwy-jade/ViewController.m"
-            timestampString = "496309358.307156"
+            timestampString = "496310081.819214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "771"
-            endingLineNumber = "771"
+            startingLineNumber = "718"
+            endingLineNumber = "718"
             landmarkName = "-handelPushContent:pushType:"
             landmarkType = "7">
          </BreakpointContent>
@@ -520,11 +520,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hwy-jade/ViewController.m"
-            timestampString = "496309358.307156"
+            timestampString = "496309658.556266"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "304"
-            endingLineNumber = "304"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
             landmarkName = "-webViewDidFinishLoad:"
             landmarkType = "7">
          </BreakpointContent>

@@ -247,6 +247,16 @@
 {
     NSLog(@"didFailLoadWithError:%@", error);
     [self hideloading];
+    if (error.code == -1009) {
+        //网络异常
+        
+        if ([webview.currentRequest.URL.absoluteString isEqualToString:@PORTAL]) {
+            //首页，则显示错误页
+            [self showNetError:webview.currentRequest.URL.absoluteString];
+        } else {
+            kTipsAlert(@"网络异常，请检查网络链接");
+        }
+    }
     //[self showNetError:webview.currentRequest.URL.absoluteString];
     
 }
