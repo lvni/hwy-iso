@@ -39,11 +39,7 @@
     _progressView.progressTintColor = [UIColor colorWithRed:179 / 255.0 green:0 blue:17/255.0 alpha:1];
     NSString *s = @PORTAL;
     [webview addSubview:_progressView];
-    //NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:s]];
-    //NSString *cookie = [webview readCurrentCookie:s];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:s]];
-    [self setCookie:officeHost];
-    //[request addValue:cookie forHTTPHeaderField:@"Cookie"];
     [webview addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
     [self.view addSubview:webview];
     [webview setDelegate:self];
@@ -222,10 +218,6 @@
 {
     //return;
     [self hideloading];
-    NSHTTPCookieStorage *myCookie = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    for (NSHTTPCookie *cookie in [myCookie cookies]) {
-        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie]; // 保存
-    }
     
     if (isDevRegister == NO && deviceTokenStr != nil) {
         //通知h5，注册当前设备
@@ -242,6 +234,7 @@
         [self webviewCallback: jsParams];
         jsParams = nil;
     }
+    
 }
 
 - (void) webView:(IMYWebView *)webView didFailLoadWithError:(NSError *)error
@@ -708,25 +701,8 @@
     return YES;
 }
 
--(void) setCookie:(NSString*)host {
-    // 寻找URL为HOST的相关cookie，不用担心，步骤2已经自动为cookie设置好了相关的URL信息
-    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:host]]; // 这里的HOST是你web服务器的域名地址
-    // 设置header，通过遍历cookies来一个一个的设置header
-    for (NSHTTPCookie *cookie in cookies){
-        
-        // cookiesWithResponseHeaderFields方法，需要为URL设置一个cookie为NSDictionary类型的header，注意NSDictionary里面的forKey需要是@"Set-Cookie"
-        NSArray *headeringCookie = [NSHTTPCookie cookiesWithResponseHeaderFields:
-                                    [NSDictionary dictionaryWithObject:
-                                     [[NSString alloc] initWithFormat:@"%@=%@",[cookie name],[cookie value]]
-                                                                forKey:@"Set-Cookie"]
-                                                                          forURL:[NSURL URLWithString:host]];
-        
-        // 通过setCookies方法，完成设置，这样只要一访问URL为HOST的网页时，会自动附带上设置好的header
-        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookies:headeringCookie
-                                                           forURL:[NSURL URLWithString:host]
-                                                  mainDocumentURL:nil];
-    }
-}
+
+
 /**
  * 获取push注册的token，并传给H5
  **/
