@@ -22,7 +22,7 @@
     NSArray *tmp = [query componentsSeparatedByString:@"&"];
     id i;
     for (i in tmp) {
-        NSArray* kp =[i componentsJoinedByString:@"="];
+        NSArray* kp = [i componentsSeparatedByString:@"="];
         if ([kp count] != 2) {
             continue;
         }

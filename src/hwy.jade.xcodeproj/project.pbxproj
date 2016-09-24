@@ -51,7 +51,6 @@
 		A5C9A54A1D55928D00B22E28 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5C9A5481D55928D00B22E28 /* LaunchScreen.storyboard */; };
 		A5C9A5551D55928D00B22E28 /* hwy_jadeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C9A5541D55928D00B22E28 /* hwy_jadeTests.m */; };
 		A5C9A5601D55928D00B22E28 /* hwy_jadeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C9A55F1D55928D00B22E28 /* hwy_jadeUITests.m */; };
-		A5C9A56E1D55B10F00B22E28 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5C9A54B1D55928D00B22E28 /* Info.plist */; };
 		A5D0594B1D5F040400CF3E00 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5D0594A1D5F040400CF3E00 /* AVFoundation.framework */; };
 		A5D59DE71D5881DB0075E116 /* HWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D59DE61D5881DB0075E116 /* HWebView.m */; };
 /* End PBXBuildFile section */
@@ -453,7 +452,7 @@
 		A5C9A52F1D55928D00B22E28 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = hwy;
 				TargetAttributes = {
 					A5C9A5361D55928D00B22E28 = {
@@ -497,7 +496,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A50DF58E1D925B2800C5AC61 /* AlipaySDK.bundle in Resources */,
-				A5C9A56E1D55B10F00B22E28 /* Info.plist in Resources */,
 				A593F7D41D640B68009C5D38 /* QRCodeLine@3x.png in Resources */,
 				A593F7D81D640B68009C5D38 /* QRCodeTopRight@3x.png in Resources */,
 				A5C9A54A1D55928D00B22E28 /* LaunchScreen.storyboard in Resources */,
@@ -617,8 +615,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -661,8 +661,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -701,7 +703,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "hwy-jade/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -732,7 +734,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "hwy-jade/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

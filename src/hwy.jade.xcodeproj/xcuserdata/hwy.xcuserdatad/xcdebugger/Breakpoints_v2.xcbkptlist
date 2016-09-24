@@ -158,7 +158,7 @@
             startingLineNumber = "24"
             endingLineNumber = "24"
             landmarkName = "-parseQuery:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -174,7 +174,7 @@
             startingLineNumber = "22"
             endingLineNumber = "22"
             landmarkName = "-parseQuery:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -254,7 +254,7 @@
             startingLineNumber = "36"
             endingLineNumber = "36"
             landmarkName = "-viewDidLoad"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -270,7 +270,7 @@
             startingLineNumber = "278"
             endingLineNumber = "278"
             landmarkName = "-captureOutput:didOutputMetadataObjects:fromConnection:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
