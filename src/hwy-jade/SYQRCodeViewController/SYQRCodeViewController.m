@@ -120,7 +120,7 @@
     [_vActivityIndicator stopAnimating];
 }
 
-#warning 使用openURL前请添加scheme：prefs
+//#warning 使用openURL前请添加scheme：prefs
 - (void)_handleTipsTap {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kIOS8_OR_LATER ? UIApplicationOpenSettingsURLString : @"prefs:root"]];
 }

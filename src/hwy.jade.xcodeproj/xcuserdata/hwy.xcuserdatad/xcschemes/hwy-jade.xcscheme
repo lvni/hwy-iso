@@ -62,7 +62,7 @@
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A5C9A5361D55928D00B22E28"
-            BuildableName = "&#x6d2a;&#x4e94;&#x7237;&#x73e0;&#x5b9d;.app"
+            BuildableName = "hwy.jade.app"
             BlueprintName = "hwy.jade"
             ReferencedContainer = "container:hwy.jade.xcodeproj">
          </BuildableReference>
