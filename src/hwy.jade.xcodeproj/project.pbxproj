@@ -123,7 +123,7 @@
 		A5BBD1201D5C611D0075C4A0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A5BBD1221D5C61390075C4A0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		A5BBD1271D5C63360075C4A0 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		A5C9A5371D55928D00B22E28 /* 洪五爷珠宝.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "洪五爷珠宝.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5C9A5371D55928D00B22E28 /* hwy.jade.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hwy.jade.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5C9A53B1D55928D00B22E28 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A5C9A53D1D55928D00B22E28 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A5C9A53E1D55928D00B22E28 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -327,7 +327,7 @@
 		A5C9A5381D55928D00B22E28 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A5C9A5371D55928D00B22E28 /* 洪五爷珠宝.app */,
+				A5C9A5371D55928D00B22E28 /* hwy.jade.app */,
 				A5C9A5501D55928D00B22E28 /* 洪五爷珠宝.xctest */,
 				A5C9A55B1D55928D00B22E28 /* 洪五爷珠宝.xctest */,
 			);
@@ -407,7 +407,7 @@
 			);
 			name = hwy.jade;
 			productName = "hwy-jade";
-			productReference = A5C9A5371D55928D00B22E28 /* 洪五爷珠宝.app */;
+			productReference = A5C9A5371D55928D00B22E28 /* hwy.jade.app */;
 			productType = "com.apple.product-type.application";
 		};
 		A5C9A54F1D55928D00B22E28 /* hwy.jadeTests */ = {
@@ -640,10 +640,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos10.0;
 			};
 			name = Debug;
 		};
@@ -680,9 +680,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos10.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -703,7 +703,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "hwy-jade/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -712,7 +712,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = GZLiuYuan.jade;
-				PRODUCT_NAME = "洪五爷珠宝";
+				PRODUCT_NAME = hwy.jade;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -734,7 +734,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "hwy-jade/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -743,7 +743,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = GZLiuYuan.jade;
-				PRODUCT_NAME = "洪五爷珠宝";
+				PRODUCT_NAME = hwy.jade;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
