@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A5C9A5361D55928D00B22E28"
-               BuildableName = "&#x6d2a;&#x4e94;&#x7237;&#x73e0;&#x5b9d;.app"
+               BuildableName = "hwy.jade.app"
                BlueprintName = "hwy.jade"
                ReferencedContainer = "container:hwy.jade.xcodeproj">
             </BuildableReference>
@@ -53,7 +53,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A5C9A5361D55928D00B22E28"
-            BuildableName = "&#x6d2a;&#x4e94;&#x7237;&#x73e0;&#x5b9d;.app"
+            BuildableName = "hwy.jade.app"
             BlueprintName = "hwy.jade"
             ReferencedContainer = "container:hwy.jade.xcodeproj">
          </BuildableReference>
@@ -89,7 +89,7 @@
       </LocationScenarioReference>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -99,7 +99,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A5C9A5361D55928D00B22E28"
-            BuildableName = "&#x6d2a;&#x4e94;&#x7237;&#x73e0;&#x5b9d;.app"
+            BuildableName = "hwy.jade.app"
             BlueprintName = "hwy.jade"
             ReferencedContainer = "container:hwy.jade.xcodeproj">
          </BuildableReference>
