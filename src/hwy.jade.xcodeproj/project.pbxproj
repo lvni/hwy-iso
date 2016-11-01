@@ -22,6 +22,7 @@
 		A53E1AED1D5C20F900D99242 /* Utiils.m in Sources */ = {isa = PBXBuildFile; fileRef = A53E1AEB1D5C20F800D99242 /* Utiils.m */; };
 		A53EBA971D62ACFB000F1C48 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = A53EBA951D62ACFB000F1C48 /* loading.gif */; };
 		A53EBA981D62ACFB000F1C48 /* loading.html in Resources */ = {isa = PBXBuildFile; fileRef = A53EBA961D62ACFB000F1C48 /* loading.html */; };
+		A563AC131DC8712700856E2D /* notify_ring.wav in Resources */ = {isa = PBXBuildFile; fileRef = A563AC121DC8712700856E2D /* notify_ring.wav */; };
 		A593F7CE1D640B68009C5D38 /* AVCaptureVideoPreviewLayer+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = A593F7BF1D640B68009C5D38 /* AVCaptureVideoPreviewLayer+Helper.m */; };
 		A593F7CF1D640B68009C5D38 /* QRCodebottomLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A593F7C01D640B68009C5D38 /* QRCodebottomLeft@2x.png */; };
 		A593F7D01D640B68009C5D38 /* QRCodebottomLeft@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A593F7C11D640B68009C5D38 /* QRCodebottomLeft@3x.png */; };
@@ -96,6 +97,7 @@
 		A53EBA951D62ACFB000F1C48 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		A53EBA961D62ACFB000F1C48 /* loading.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = loading.html; sourceTree = "<group>"; };
 		A53FDF401D63F9C200836705 /* Const.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Const.h; sourceTree = "<group>"; };
+		A563AC121DC8712700856E2D /* notify_ring.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = notify_ring.wav; path = "hwy-jade/push/notify_ring.wav"; sourceTree = "<group>"; };
 		A593F7BE1D640B68009C5D38 /* AVCaptureVideoPreviewLayer+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AVCaptureVideoPreviewLayer+Helper.h"; sourceTree = "<group>"; };
 		A593F7BF1D640B68009C5D38 /* AVCaptureVideoPreviewLayer+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AVCaptureVideoPreviewLayer+Helper.m"; sourceTree = "<group>"; };
 		A593F7C01D640B68009C5D38 /* QRCodebottomLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QRCodebottomLeft@2x.png"; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 			isa = PBXGroup;
 			children = (
 				A5119B151D9B65DA00142D2A /* hwy.jade.entitlements */,
+				A563AC121DC8712700856E2D /* notify_ring.wav */,
 				A50DF58D1D925B2800C5AC61 /* AlipaySDK.bundle */,
 				A593F7BD1D640B68009C5D38 /* SYQRCodeViewController */,
 				A53EBA941D62ACFB000F1C48 /* html */,
@@ -516,6 +519,7 @@
 				A593F7D81D640B68009C5D38 /* QRCodeTopRight@3x.png in Resources */,
 				A5C9A54A1D55928D00B22E28 /* LaunchScreen.storyboard in Resources */,
 				A53EBA971D62ACFB000F1C48 /* loading.gif in Resources */,
+				A563AC131DC8712700856E2D /* notify_ring.wav in Resources */,
 				A50DF5761D922B5700C5AC61 /* error.html in Resources */,
 				A593F7D61D640B68009C5D38 /* QRCodeTopLeft@3x.png in Resources */,
 				A593F7D21D640B68009C5D38 /* QRCodebottomRight@3x.png in Resources */,
