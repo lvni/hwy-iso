@@ -462,7 +462,7 @@
 				TargetAttributes = {
 					A5C9A5361D55928D00B22E28 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = GL3BV3VAS3;
+						DevelopmentTeam = 5VDDF9S846;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.DataProtection = {
@@ -716,7 +716,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = GL3BV3VAS3;
+				DEVELOPMENT_TEAM = 5VDDF9S846;
 				ENABLE_BITCODE = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -749,7 +749,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = GL3BV3VAS3;
+				DEVELOPMENT_TEAM = 5VDDF9S846;
 				ENABLE_BITCODE = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (

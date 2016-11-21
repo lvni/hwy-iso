@@ -177,7 +177,7 @@
 
 //按钮点击事件回调
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void (^)())completionHandler{
-    if([identifier isEqualToString:@"ACCEPT_IDENTIFIER"]){
+    if([identifier isEqualToString:@"ACy2016CEPT_IDENTIFIER"]){
         NSLog(@"ACCEPT_IDENTIFIER is clicked");
         
     }
