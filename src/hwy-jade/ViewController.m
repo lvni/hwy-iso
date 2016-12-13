@@ -266,6 +266,7 @@
     NSString *scheme = [url scheme];
     NSString *contoller = [url host];
     NSString *query = [url query];
+    //NSLog(@"url is %@", url);
     //处理自定义的协议
     if ([scheme isEqualToString:@"hwy"]) {
         
